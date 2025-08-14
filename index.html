@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Preposition Trainer (React + PapaParse)</title>
+  <style>
+    :root{
+      --bg:#0b0f17; --fg:#e6ebf3; --muted:#aab6cf; --ok:#46d38a; --bad:#ff6b6b; --accent:#7aa2ff;
+    }
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);} 
+    #root{height:100%;display:flex;align-items:flex-start;justify-content:center;}
+    .app{width:min(920px,100%);padding:24px 20px 32px;}
+    .header{font:700 44px/1.2 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; text-align:center; margin-top:16px;}
+    .spacer-1{height:40px;}
+    .spacer-2{height:60px;}
+    .row{white-space:nowrap; overflow-x:auto; scrollbar-width:thin;}
+    .before,.after{font:500 28px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; display:inline-block;}
+    .inputWrap{display:inline-flex; align-items:center; border:2px solid var(--accent); border-radius:10px; padding:6px 8px; margin:0 6px;}
+    .input{font:600 20px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:var(--fg); background:transparent; border:none; outline:none; width:1ch; min-width:1ch;}
+    .footer{font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--muted);} 
+    .result{font:600 22px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin-bottom:6px;}
+    .ok{color:var(--ok);} .bad{color:var(--bad);} .answer{color:#cfd8f7}
+    /* Simple 2s fade (no initial hold). Re-applying with a new key restarts it. */
+    .fade2s{ animation: fade2s 2s linear forwards; }
+    @keyframes fade2s{ 0% { opacity: 1; } 100% { opacity: 0; } }
+    .sr-only{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+  </style>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const CSV = `
+preposition,verb,usage case
+about,complain,"People often complain --- the noise from the street."
+in,be interested,"She is interested --- medieval history."
+to,listen,"Please listen --- your teacher during the lecture."
+for,wait,"We will wait --- the next train."
+with,agree,"I agree --- you on that point."
+on,insist,"He insisted --- paying for dinner."
+from,suffer,"Many people suffer --- allergies in spring."
+at,arrive,"They arrived --- the airport late at night."
+to,belong,"This book belongs --- my sister."
+for,apply,"He applied --- a new passport yesterday."
+`;
+
+    const parse = (csv) => Papa.parse(csv.trim(), {header:true, skipEmptyLines:true}).data;
+    const answersOf = (row) => (row.preposition||'').toLowerCase().split('|').map(s=>s.trim());
+
+    // Self-tests (unchanged, plus a couple extras)
+    (function tests(){
+      try {
+        const rows = parse(CSV);
+        console.assert(Array.isArray(rows) && rows.length >= 3, 'parsed rows >= 3');
+        console.assert(rows[0]['usage case']?.includes('---'), 'usage case has placeholder');
+        const sampleCRLF = parse('a,b,c\r\n1,2,"x,y"');
+        console.assert(sampleCRLF.length === 1 && sampleCRLF[0].a==='1', 'CRLF handled');
+        const multi = parse('preposition,verb,usage case\n"to|for",apply,"Apply --- the program"');
+        console.assert(multi[0].preposition==='to|for', 'multiple answers parsed');
+        console.assert(answersOf({preposition:'to|for'}).includes('to'), 'answer matching works');
+        console.assert(!answersOf({preposition:'in'}).includes('on'), 'negative match works');
+        console.log('%cSELF-TESTS PASSED','color:#46d38a');
+      } catch(e){ console.error('SELF-TEST FAILED', e); }
+    })();
+
+    function App(){
+      const data = React.useMemo(()=>parse(CSV), []);
+      const [idx, setIdx] = React.useState(() => Math.floor(Math.random()*data.length));
+      const [value, setValue] = React.useState('');
+      const inputRef = React.useRef(null);
+
+      // Toast-like result banner state
+      const [toast, setToast] = React.useState(null); // { key, ok, text, answerText }
+
+      const row = data[idx] || {};
+      const [before, after] = (row['usage case']||'').split('---');
+
+      const focusInput = () => setTimeout(()=> inputRef.current?.focus(), 0);
+
+      const advanceIndex = React.useCallback((wasOk)=>{
+        if (wasOk){
+          // next random different index
+          setIdx(prev=>{
+            if (data.length<=1) return prev;
+            let next = prev; while (next===prev){ next = Math.floor(Math.random()*data.length); }
+            return next;
+          });
+        } else {
+          // repeat same (no-op)
+          setIdx(prev=>prev);
+        }
+      }, [data.length]);
+
+      const check = React.useCallback(()=>{
+        const correct = answersOf(row);
+        const v = (value||'').trim().toLowerCase();
+        const wasOk = correct.includes(v);
+        // Create/replace toast immediately and restart animation by changing key
+        const toastData = {
+          key: Date.now(),
+          ok: wasOk,
+          text: wasOk ? 'OK' : 'Wrong',
+          answerText: wasOk ? null : `Correct answer: ${correct.map(a=>`"${a}"`).join(' or ')}`
+        };
+        setToast(toastData);
+        // Immediately advance (or repeat) without waiting for fade
+        advanceIndex(wasOk);
+        setValue('');
+        focusInput();
+      }, [row, value, advanceIndex]);
+
+      // Auto-remove toast from DOM after 2s (so it doesn't pile up). If a new check
+      // happens sooner, setToast with a new key replaces it and restarts animation.
+      React.useEffect(()=>{
+        if (!toast) return;
+        const t = setTimeout(()=> setToast(null), 2000);
+        return ()=> clearTimeout(t);
+      }, [toast]);
+
+      const onSubmit = (e)=>{ e.preventDefault(); check(); };
+      const inputWidthCh = Math.max(1, value.length);
+      React.useEffect(()=>{ focusInput(); }, [idx]);
+
+      return (
+        <div className="app">
+          <div className="header">Preposition Trainer</div>
+          <div className="spacer-1"/>
+
+          <form className="row" aria-live="polite" onSubmit={onSubmit}>
+            <span className="before">{(before||'').trim()}&nbsp;</span>
+            <span className="inputWrap">
+              <input
+                ref={inputRef}
+                className="input"
+                autoCapitalize="off"
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck={false}
+                value={value}
+                onChange={(e)=> setValue(e.target.value.toLowerCase())}
+                style={{width: `${inputWidthCh}ch`}}
+                aria-label="Missing preposition"
+              />
+            </span>
+            <span className="after">&nbsp;{(after||'').trim()}</span>
+            <button type="submit" className="sr-only">Check</button>
+          </form>
+
+          <div className="spacer-2"/>
+
+          {/* Footer: either hint or fading result toast */}
+          {toast ? (
+            <div key={toast.key} className="footer fade2s">
+              <div className={"result "+(toast.ok?"ok":"bad")}>{toast.text}</div>
+              {toast.answerText && (
+                <div className="answer">{toast.answerText}</div>
+              )}
+            </div>
+          ) : (
+            <div className="footer">Type the missing preposition and press <strong>Enter</strong> to check.</div>
+          )}
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App/>);
+  </script>
+</body>
+</html>
