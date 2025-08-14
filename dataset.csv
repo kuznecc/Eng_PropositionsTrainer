@@ -1,131 +1,315 @@
 preposition,verb,usage case
-about,complain,"She is complaining --- the constant noise"
-in,be interested,"I am interested --- learning Spanish"
-on,rely,"You can rely --- her advice"
-on,depend,"The result depends --- your effort"
-for,apply,"He applied --- the scholarship"
-for,wait,"We are waiting --- the bus"
-at,look,"Please look --- the board"
-for,look,"I am looking --- my keys"
-into,look,"They will look --- the matter"
-after,look,"She looks --- her younger brother"
-of,consist,"The committee consists --- ten members"
-in,believe,"Do you believe --- miracles"
-on,focus,"Let us focus --- the main issue"
-with,agree,"I agree --- your point"
-on,agree,"They agreed --- a new date"
-to,agree,"He agreed --- help us"
-for,apologize,"She apologized --- the mistake"
-of,approve,"Do you approve --- this plan"
-for,blame,"They blamed him --- the delay"
-on,blame,"He blamed the weather --- the loss"
-from,benefit,"Everyone benefited --- the new policy"
-from,borrow,"I borrowed a book --- the library"
-about,care,"She cares deeply --- the environment"
-for,care,"He cares --- his elderly neighbor"
-with,charge,"They charged her --- theft"
-for,charge,"The store charged me --- delivery"
-on,comment,"Please comment --- the proposal"
-to,compare,"They compared the copy --- the original"
-with,compare,"Compare this model --- the older one"
-with,compete,"Our team competes --- the best clubs"
-against,compete,"She competes --- strong rivals"
-for,compete,"Five cities are competing --- the award"
-on,concentrate,"Please concentrate --- the task"
-on,congratulate,"We congratulated him --- his promotion"
-to,connect,"Connect your phone --- the Wi Fi"
-with,connect,"This road connects the town --- the highway"
-to,consent,"She consented --- the search"
-with,cope,"He struggles to cope --- stress"
-on,count,"You can count --- me"
-with,deal,"We need to deal --- this issue"
-on,decide,"They decided --- a new strategy"
-from,deter,"The warning deterred him --- risky actions"
-from,differ,"This model differs --- the old one"
-with,disagree,"I disagree --- your conclusion"
-about,disagree,"They disagree --- the budget"
-on,disagree,"We disagree --- the method"
-of,dream,"I often dream --- flying"
-about,dream,"She dreams --- a quiet life"
-on,insist,"They insist --- full payment"
-in,participate,"He will participate --- the tournament"
-for,pay,"We paid --- the tickets"
-on,plan,"I plan --- visiting you tomorrow"
-for,prepare,"She is preparing --- the exam"
-from,prevent,"Rain prevented us --- playing outside"
-from,protect,"They protected the crops --- frost"
-against,protect,"Use this to protect your skin --- the sun"
-with,provide,"The school provided us --- laptops"
-for,provide,"They provide meals --- the staff"
-to,refer,"Please refer --- the manual"
-as,regard,"Many regard him --- a pioneer"
-of,remind,"This song reminds me --- summer"
-about,remind,"Please remind me --- the meeting"
-with,replace,"We replaced the old part --- a new one"
-by,replace,"The manager was replaced --- her deputy"
-to,respond,"He responded --- my email"
-in,result,"The changes resulted --- higher sales"
-from,result,"The error results --- a missing file"
-for,search,"They are searching --- a solution"
-at,smile,"She smiled --- the baby"
-about,speak,"We spoke --- the project"
-to,speak,"She spoke --- the manager"
-of,speak,"He often speaks --- his childhood"
-on,spend,"We spent too much --- food"
-in,succeed,"She succeeded --- her goal"
-from,suffer,"Many people suffer --- allergies"
-about,talk,"We talked --- travel plans"
-to,talk,"He talked --- his coach"
-into,talk,"They talked me --- joining them"
-about,think,"I am thinking --- your idea"
-of,think,"Think --- a number from one to ten"
-for,vote,"They voted --- the new mayor"
-against,vote,"Some voted --- the proposal"
-for,wait,"I waited --- your call"
-about,worry,"Do not worry --- the test"
-about,write,"He wrote --- climate change"
-to,write,"Please write --- your grandparents"
-of,accuse,"They accused him --- cheating"
-to,adapt,"We adapted quickly --- the new schedule"
-to,adhere,"Please adhere --- the safety rules"
-at,aim,"The campaign aims --- young voters"
-for,ask,"She asked --- help"
-about,ask,"He asked --- your health"
-for,call,"They called --- an investigation"
-off,call,"The match was called --- due to rain"
-for,clamor,"Fans clamored --- more songs"
-to,commit,"He committed --- the plan"
-to,contribute,"She contributed --- the fund"
-to,devote,"He devotes hours --- training"
-from,escape,"They escaped --- the burning house"
-on,expand,"The company expanded --- new markets"
-with,fill,"Please fill this form --- your details"
-with,help,"Can you help me --- this task"
-to,invite,"They invited us --- the ceremony"
-of,notify,"Please notify me --- any changes"
-with,provide,"Can you provide me --- more data"
-of,rob,"They robbed him --- his wallet"
-for,search,"We searched --- clues"
-from,recover,"She recovered --- the illness"
-on,base,"We based our decision --- the data"
-to,belong,"This book belongs --- me"
-with,confuse,"Do not confuse price --- value"
-to,expose,"The scandal exposed them --- criticism"
-from,graduate,"She graduated --- college last year"
-with,identify,"We identified the bug --- the new parser"
-for,long,"He longs --- peace"
-on,operate,"This machine operates --- electricity"
-from,profit,"They profited --- the deal"
-in,result,"Our efforts will result --- success"
-from,retire,"He retired --- the army"
-on,spend,"She spends a lot --- books"
-on,rely,"We rely --- accurate data"
-with,threaten,"The clouds threaten us --- rain"
-to,attribute,"They attribute success --- hard work"
-from,benefit,"The city will benefit --- tourism"
-on,comment,"She refused to comment --- rumors"
-to,contribute,"They love to contribute --- open source"
-for,hope,"I hope --- sunny weather"
-of,approve,"Parents must approve --- the trip"
-on,insist,"He still insists --- his version"
-for,apply,"You should apply --- a visa early"
+about,complain,She complained --- the noise next door
+about,talk,We talked --- the new project
+about,think,I am thinking --- your idea
+about,worry,Do not worry --- the exam
+about,argue,They argued --- the price
+about,dream,He dreams --- moving abroad
+about,hear,I heard --- the concert
+about,read,She read --- the discovery yesterday
+about,write,He wrote --- the results
+about,care,She cares --- her team a lot
+about,laugh,We laughed --- the mistake later
+about,joke,He joked --- his cooking
+about,know,Do you know --- this rule
+about,learn,We learned --- the change today
+about,tell,Please tell me --- your plans
+about,forget,He forgot --- the meeting
+about,remind,Please remind me --- the deadline
+about,warn,They warned us --- the risk
+about,boast,He boasted --- his victory
+about,decide,We must decide --- the strategy
+
+for,apologize,She apologized --- the delay
+for,apply,He applied --- the job last week
+for,ask,I will ask --- directions
+for,pay,We paid --- the tickets
+for,prepare,They prepared --- the trip
+for,search,We searched --- the file
+for,wait,She waited --- an hour
+for,wish,He wished --- a quiet weekend
+for,hope,We hope --- good weather
+for,vote,They voted --- the proposal
+for,blame,Do not blame me --- the error
+for,care,She cares --- the elderly
+for,forgive,Please forgive me --- the confusion
+for,stand,This symbol stands --- peace
+for,qualify,He qualified --- the finals
+for,sue,They sued --- damages
+for,thank,I thanked him --- the help
+for,compete,We will compete --- the prize
+for,negotiate,They negotiated --- a better rate
+for,plan,We planned --- the future event
+
+to,belong,This book belongs --- Anna
+to,listen,Please listen --- the instructions
+to,refer,He referred --- the manual
+to,respond,She responded --- the email
+to,talk,I talked --- my manager
+to,speak,She spoke --- the class
+to,object,He objected --- the change
+to,agree,We agreed --- the terms
+to,consent,They consented --- the test
+to,contribute,He contributed --- the fund
+to,lead,This path leads --- the river
+to,relate,The story relates --- our work
+to,reply,She replied --- my message
+to,subscribe,He subscribed --- the channel
+to,travel,We traveled --- the coast
+to,move,They moved --- a new city
+to,go,We will go --- the museum
+to,return,She returned --- the office
+to,compare,They compared it --- the old model
+to,admit,He admitted --- the mistake
+
+with,agree,I agree --- your point
+with,argue,She argued --- her brother
+with,dealt,We dealt --- the issue quickly
+with,help,He helped --- the report
+with,interfere,Do not interfere --- the process
+with,compete,They compete --- each other
+with,compare,We compared this --- that
+with,comply,Please comply --- the rules
+with,connect,It connects --- the network
+with,converse,She conversed --- the guests
+with,cope,He coped --- the pressure
+with,correspond,We correspond --- clients often
+with,fight,They fought --- courage
+with,play,She played --- the kids
+with,stay,He stayed --- his friends
+with,work,We work --- partners worldwide
+with,speak,She spoke --- confidence
+with,chat,We chatted --- the neighbors
+with,struggle,He struggles --- time management
+with,sympathize,I sympathize --- your loss
+
+on,depend,We depend --- your support
+on,focus,Please focus --- the goal
+on,insist,She insisted --- paying
+on,rely,He relies --- his notes
+on,count,You can count --- me
+on,work,They worked --- the design
+on,bet,He bet --- the home team
+on,call,We called --- our suppliers
+on,concentrate,Please concentrate --- the task
+on,decide,We decided --- a plan
+on,comment,She commented --- the report
+on,elaborate,Please elaborate --- that point
+on,expand,They expanded --- the idea
+on,report,We reported --- the issue
+on,check,He checked --- the status
+on,plan,They plan --- moving soon
+on,move,Let us move --- the next item
+on,base,We base this --- facts
+on,vote,They voted --- the motion
+on,draw,He drew --- his experience
+
+in,believe,She believes --- herself
+in,engage,They engage --- open debate
+in,invest,He invested --- clean energy
+in,participate,We participate --- the event
+in,specialize,The lab specializes --- robotics
+in,succeed,She succeeded --- her role
+in,trust,He trusts --- his team
+in,result,The delay resulted --- a loss
+in,involve,They involved us --- the review
+in,include,Please include me --- the email
+in,confide,She confided --- a friend
+in,persist,He persisted --- his efforts
+in,delight,She delights --- small joys
+in,enroll,He enrolled --- a course
+in,assist,We assist you --- this task
+in,excel,They excel --- math
+in,train,She trains --- data analysis
+in,instruct,He instructs interns --- safety
+in,fail,They failed --- basic checks
+in,participated,He participated --- many trials
+
+at,aim,We aim --- higher quality
+at,arrive,They arrived --- noon
+at,laugh,She laughed --- the joke
+at,look,He looked --- the screen
+at,guess,We guessed --- the answer
+at,hint,She hinted --- a surprise
+at,shout,He shouted --- the driver
+at,smile,She smiled --- the child
+at,stare,They stared --- the painting
+at,excel,He excels --- chess
+at,work,She works --- night
+at,win,They win --- chess often
+at,throw,He threw it --- the target
+at,yell,She yelled --- her phone
+at,poke,He poked --- the fire
+at,shoot,They shot --- the goal
+at,glance,She glanced --- the clock
+at,glare,He glared --- the screen
+at,snap,She snapped --- me in anger
+at,bark,The dog barked --- strangers
+
+from,benefit,We benefit --- this plan
+from,come,This idea came --- the team
+from,differ,It differs --- the old one
+from,escape,He escaped --- danger
+from,graduate,She graduated --- college
+from,recover,He recovered --- illness
+from,resign,She resigned --- the board
+from,retire,He retired --- service
+from,separate,They separated it --- the rest
+from,suffer,He suffers --- allergies
+from,emerge,The truth emerged --- the audit
+from,hide,She hid --- the rain
+from,learn,We learn --- mistakes
+from,prevent,They prevent us --- entering
+from,protect,This protects you --- harm
+from,refrain,Please refrain --- smoking
+from,remove,They removed it --- the list
+from,save,He saved us --- trouble
+from,stem,It stems --- a rule
+from,subtract,Please subtract five --- the total
+
+of,approve,They approve --- the plan
+of,think,I think --- a solution
+of,hear,We heard --- the update
+of,dream,He dreamed --- success
+of,dispose,They disposed --- waste safely
+of,consist,The team consists --- five people
+of,accuse,They accused him --- theft
+of,assure,She assured me --- help
+of,beware,Beware --- scams online
+of,boast,He boasted --- his skill
+of,convict,They convicted her --- fraud
+of,die,He died --- old age
+of,rid,They rid the room --- dust
+of,remind,This reminds me --- home
+of,rob,Thieves robbed him --- cash
+of,suspect,They suspect her --- lying
+of,tire,He tired --- the routine
+of,warn,They warned us --- danger
+of,inform,Please inform me --- any change
+of,cure,The treatment cured him --- fear
+
+into,look,We will look --- the issue
+into,run,He ran --- an old friend
+into,bump,She bumped --- the chair
+into,check,They checked --- the hotel
+into,break,Thieves broke --- the house
+into,go,We went --- the shop
+into,get,He got --- trouble
+into,translate,We translated it --- Spanish
+into,turn,The rain turned roads --- ice
+into,dive,She dived --- the pool
+into,dig,They dug --- the data
+into,crash,The car crashed --- a wall
+into,convert,We converted euros --- dollars
+into,enter,They entered --- a contract
+into,split,We split it --- parts
+into,feed,The data feeds --- the model
+into,pour,He poured water --- the glass
+into,fit,It fits --- the box
+into,plug,Please plug it --- the socket
+into,throw,He threw it --- the bin
+
+against,argue,They argued --- the proposal
+against,fight,He fought --- the decision
+against,protest,People protested --- the law
+against,compete,We compete --- strong teams
+against,discriminate,Do not discriminate --- anyone
+against,guard,We guard --- theft
+against,lean,He leaned --- the wall
+against,react,They reacted --- the plan
+against,rebel,Students rebelled --- the rule
+against,vote,They voted --- the change
+against,warn,We warned them --- scams
+against,advise,She advised us --- rushing
+against,defend,We defended --- the attack
+against,protect,It protects --- corrosion
+against,insure,They insured --- loss
+against,campaign,She campaigned --- pollution
+against,conspire,They conspired --- the leader
+against,testify,He testified --- the suspect
+against,legislate,They legislated --- fraud
+against,safeguard,We safeguard --- errors
+
+over,argue,They argued --- money
+over,fight,He fought --- a seat
+over,fuss,She fussed --- details
+over,think,I will think --- it
+over,talk,We talked --- the plan
+over,watch,He watched --- the kids
+over,worry,She worried --- nothing
+over,pore,They pored --- the notes
+over,preside,He presided --- the meeting
+over,negotiate,They negotiated --- terms
+over,trip,She tripped --- a cable
+over,hand,He handed it --- to you
+over,take,They took --- the company
+over,mull,He mulled --- the offer
+over,quarrel,They quarreled --- land
+over,obsess,Do not obsess --- numbers
+over,bicker,They bickered --- chores
+over,brood,He brooded --- the loss
+over,stress,She stressed --- minor things
+over,agonize,Do not agonize --- the choice
+
+under,come,We came --- pressure
+under,fall,Sales fell --- expectations
+under,suffer,They suffered --- heavy taxes
+under,work,He works --- a strict boss
+under,operate,The system operates --- load
+under,act,She acted --- orders
+under,break,The beam broke --- weight
+under,collapse,The tent collapsed --- wind
+under,groan,The floor groaned --- strain
+under,strain,They strained --- constant demand
+under,live,We live --- the same roof
+under,labor,He labors --- rules
+under,serve,She serves --- the director
+under,trade,They trade --- a local name
+under,stay,Please stay --- cover
+under,wait,We waited --- the bridge
+under,hide,He hid --- the table
+under,huddle,They huddled --- blankets
+under,crouch,She crouched --- the tree
+under,study,He studies --- supervision
+
+between,choose,We must choose --- two options
+between,divide,They divided the cake --- them
+between,distinguish,Can you distinguish --- fact and opinion
+between,differentiate,We differentiate --- types
+between,mediate,She mediated --- the sides
+between,negotiate,They negotiated --- partners
+between,alternate,He alternates --- tasks
+between,balance,We balance time --- work and family
+between,oscillate,The signal oscillates --- limits
+between,switch,You can switch --- modes
+between,decide,They decided --- two routes
+between,move,Data moves --- servers
+between,travel,He travels --- cities
+between,toggle,Please toggle --- views
+between,flip,She flipped --- pages
+between,jump,They jumped --- topics
+between,shuttle,He shuttles --- offices
+between,arbitrate,She arbitrated --- teams
+between,hop,We hopped --- islands
+between,rotate,The role rotates --- members
+
+among,divide,They divided the tasks --- the team
+among,distribute,We distributed flyers --- people
+among,share,She shared food --- friends
+among,spread,The rumor spread --- students
+among,select,We selected one --- many options
+among,choose,They chose one --- the rest
+among,circulate,The memo circulated --- staff
+among,rank,He ranks high --- peers
+among,hide,He hid --- the crowd
+among,live,They live --- kind neighbors
+among,move,The cat moved --- the boxes
+among,mingle,She mingled --- guests
+among,place,We placed him --- the best
+among,count,He counts --- the experts
+among,number,She numbers --- the top five
+among,sit,He sat --- friends
+among,blend,The color blends --- shades
+among,scatter,Leaves scattered --- the yard
+among,allocate,We allocated funds --- teams
+among,split,They split profits --- partners

@@ -34,7 +34,8 @@
 <body>
   <div id="root"></div>
   <script type="text/babel">
-    const CSV = `
+    // ===== Default embedded CSV (fallback) =====
+    const CSV_FALLBACK = `
 preposition,verb,usage case
 about,complain,"People often complain --- the noise from the street."
 in,be interested,"She is interested --- medieval history."
@@ -51,10 +52,25 @@ for,apply,"He applied --- a new passport yesterday."
     const parse = (csv) => Papa.parse(csv.trim(), {header:true, skipEmptyLines:true}).data;
     const answersOf = (row) => (row.preposition||'').toLowerCase().split('|').map(s=>s.trim());
 
-    // Self-tests (unchanged, plus a couple extras)
+    // ===== Try to load external dataset.csv (same folder). If it exists, override fallback. =====
+    async function loadDataset(){
+      try {
+        const res = await fetch('dataset.csv', { cache: 'no-store' });
+        if (!res.ok) throw new Error('dataset.csv not found');
+        const text = await res.text();
+        const parsed = parse(text);
+        if (Array.isArray(parsed) && parsed.length) return parsed;
+        // if parsed but empty, fall back
+      } catch (e) {
+        // swallow and fall back
+      }
+      return parse(CSV_FALLBACK);
+    }
+
+    // ===== Self-tests (parsing) =====
     (function tests(){
       try {
-        const rows = parse(CSV);
+        const rows = parse(CSV_FALLBACK);
         console.assert(Array.isArray(rows) && rows.length >= 3, 'parsed rows >= 3');
         console.assert(rows[0]['usage case']?.includes('---'), 'usage case has placeholder');
         const sampleCRLF = parse('a,b,c\r\n1,2,"x,y"');
@@ -68,13 +84,26 @@ for,apply,"He applied --- a new passport yesterday."
     })();
 
     function App(){
-      const data = React.useMemo(()=>parse(CSV), []);
-      const [idx, setIdx] = React.useState(() => Math.floor(Math.random()*data.length));
+      const [data, setData] = React.useState(()=>parse(CSV_FALLBACK));
+      const [idx, setIdx] = React.useState(0);
       const [value, setValue] = React.useState('');
       const inputRef = React.useRef(null);
 
       // Toast-like result banner state
       const [toast, setToast] = React.useState(null); // { key, ok, text, answerText }
+
+      // Load external dataset if available, else keep fallback
+      React.useEffect(()=>{
+        let alive = true;
+        (async()=>{
+          const rows = await loadDataset();
+          if (!alive) return;
+          setData(rows);
+          // choose a random start after data is known
+          setIdx(Math.floor(Math.random()*Math.max(1, rows.length)) % Math.max(1, rows.length));
+        })();
+        return ()=>{ alive = false; };
+      }, []);
 
       const row = data[idx] || {};
       const [before, after] = (row['usage case']||'').split('---');
@@ -82,17 +111,12 @@ for,apply,"He applied --- a new passport yesterday."
       const focusInput = () => setTimeout(()=> inputRef.current?.focus(), 0);
 
       const advanceIndex = React.useCallback((wasOk)=>{
-        if (wasOk){
-          // next random different index
-          setIdx(prev=>{
-            if (data.length<=1) return prev;
-            let next = prev; while (next===prev){ next = Math.floor(Math.random()*data.length); }
-            return next;
-          });
-        } else {
-          // repeat same (no-op)
-          setIdx(prev=>prev);
-        }
+        setIdx(prev=>{
+          if (!wasOk) return prev; // repeat same on wrong
+          if (data.length<=1) return prev;
+          let next = prev; while (next===prev){ next = Math.floor(Math.random()*data.length); }
+          return next;
+        });
       }, [data.length]);
 
       const check = React.useCallback(()=>{
@@ -113,8 +137,7 @@ for,apply,"He applied --- a new passport yesterday."
         focusInput();
       }, [row, value, advanceIndex]);
 
-      // Auto-remove toast from DOM after 2s (so it doesn't pile up). If a new check
-      // happens sooner, setToast with a new key replaces it and restarts animation.
+      // Auto-remove toast from DOM after 2s. New checks replace and restart fade.
       React.useEffect(()=>{
         if (!toast) return;
         const t = setTimeout(()=> setToast(null), 2000);
