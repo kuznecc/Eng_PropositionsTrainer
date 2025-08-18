@@ -18,10 +18,13 @@
     .before,.after{font:500 28px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; display:inline-block;}
     .inputWrap{display:inline-flex; align-items:center; border:2px solid var(--accent); border-radius:10px; padding:6px 8px; margin:0 6px;}
     .input{font:600 20px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:var(--fg); background:transparent; border:none; outline:none; width:1ch; min-width:1ch;}
-    .level{font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--muted); margin-top: -20px; margin-bottom: 20px;}
+    .level{font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--muted); margin-bottom: 20px;}
     .footer{font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--muted);} 
     .result{font:600 22px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin-bottom:6px;}
     .ok{color:var(--ok);} .bad{color:var(--bad);} .answer{color:#cfd8f7}
+    .debug-details { margin-top: 20px; border: 1px solid var(--muted); border-radius: 8px; text-align: left; }
+    .debug-summary { padding: 8px 12px; cursor: pointer; outline: none; }
+    .debug-content { padding: 12px; white-space: pre-wrap; word-break: break-all; }
     /* Simple 2s fade (no initial hold). Re-applying with a new key restarts it. */
     .fade2s{ animation: fade2s 2s linear forwards; }
     @keyframes fade2s{ 0% { opacity: 1; } 100% { opacity: 0; } }
@@ -84,110 +87,142 @@ for,apply,"He applied --- a new passport yesterday."
       } catch(e){ console.error('SELF-TEST FAILED', e); }
     })();
 
-    function App(){
-      const [data, setData] = React.useState(()=>parse(CSV_FALLBACK));
-      const [idx, setIdx] = React.useState(0);
+    function App() {
+      const [data, setData] = React.useState([]);
+      const [levels, setLevels] = React.useState([]);
+      const [selectedLevel, setSelectedLevel] = React.useState('All Levels');
+      const [currentRow, setCurrentRow] = React.useState(null);
       const [value, setValue] = React.useState('');
       const inputRef = React.useRef(null);
+      const [toast, setToast] = React.useState(null);
 
-      // Toast-like result banner state
-      const [toast, setToast] = React.useState(null); // { key, ok, text, answerText }
-
-      // Load external dataset if available, else keep fallback
-      React.useEffect(()=>{
+      React.useEffect(() => {
         let alive = true;
-        (async()=>{
+        (async () => {
           const rows = await loadDataset();
           if (!alive) return;
           setData(rows);
-          // choose a random start after data is known
-          setIdx(Math.floor(Math.random()*Math.max(1, rows.length)) % Math.max(1, rows.length));
+          const uniqueLevels = ['All Levels', ...new Set(rows.map(r => r.level).filter(Boolean))].sort((a, b) => {
+            if (a === 'All Levels') return -1;
+            if (b === 'All Levels') return 1;
+            return a.localeCompare(b);
+          });
+          setLevels(uniqueLevels);
         })();
-        return ()=>{ alive = false; };
+        return () => { alive = false; };
       }, []);
 
-      const row = data[idx] || {};
-      const [before, after] = (row['usage_case'] || row['usage case'] || '').split('---');
+      const filteredData = React.useMemo(() => {
+        if (selectedLevel === 'All Levels') return data;
+        return data.filter(row => row.level === selectedLevel);
+      }, [data, selectedLevel]);
 
-      const focusInput = () => setTimeout(()=> inputRef.current?.focus(), 0);
+      const pickRandomRow = React.useCallback(() => {
+        if (!filteredData || filteredData.length === 0) {
+          setCurrentRow(null);
+          return;
+        }
+        const randomIndex = Math.floor(Math.random() * filteredData.length);
+        setCurrentRow(filteredData[randomIndex]);
+      }, [filteredData]);
 
-      const advanceIndex = React.useCallback((wasOk)=>{
-        setIdx(prev=>{
-          if (!wasOk) return prev; // repeat same on wrong
-          if (data.length<=1) return prev;
-          let next = prev; while (next===prev){ next = Math.floor(Math.random()*data.length); }
-          return next;
-        });
-      }, [data.length]);
+      React.useEffect(() => {
+        pickRandomRow();
+      }, [pickRandomRow]);
 
-      const check = React.useCallback(()=>{
-        const correct = answersOf(row);
-        const v = (value||'').trim().toLowerCase();
+      const check = React.useCallback(() => {
+        if (!currentRow) return;
+        const correct = answersOf(currentRow);
+        const v = (value || '').trim().toLowerCase();
         const wasOk = correct.includes(v);
-        // Create/replace toast immediately and restart animation by changing key
         const toastData = {
           key: Date.now(),
           ok: wasOk,
           text: wasOk ? 'OK' : 'Wrong',
-          answerText: wasOk ? null : `Correct answer: ${correct.map(a=>`"${a}"`).join(' or ')}`
+          answerText: wasOk ? null : `Correct answer: ${correct.map(a => `"${a}"`).join(' or ')}`
         };
         setToast(toastData);
-        // Immediately advance (or repeat) without waiting for fade
-        advanceIndex(wasOk);
+        if (wasOk) {
+          pickRandomRow();
+        }
         setValue('');
         focusInput();
-      }, [row, value, advanceIndex]);
+      }, [currentRow, value, pickRandomRow]);
 
-      // Auto-remove toast from DOM after 2s. New checks replace and restart fade.
-      React.useEffect(()=>{
+      React.useEffect(() => {
         if (!toast) return;
-        const t = setTimeout(()=> setToast(null), 2000);
-        return ()=> clearTimeout(t);
+        const t = setTimeout(() => setToast(null), 2000);
+        return () => clearTimeout(t);
       }, [toast]);
+      
+      const focusInput = () => setTimeout(()=> inputRef.current?.focus(), 0);
+      React.useEffect(()=>{ focusInput(); }, [currentRow]);
 
-      const onSubmit = (e)=>{ e.preventDefault(); check(); };
+      const handleLevelChange = (event) => {
+        setSelectedLevel(event.target.value);
+      };
+
+      const onSubmit = (e) => { e.preventDefault(); check(); };
       const inputWidthCh = Math.max(1, value.length);
-      React.useEffect(()=>{ focusInput(); }, [idx]);
+      
+      const [before, after] = (currentRow?.['usage_case'] || currentRow?.['usage case'] || '').split('---');
+
+      const footerContent = toast ? (
+        <div key={toast.key} className="footer fade2s">
+          <div className={"result " + (toast.ok ? "ok" : "bad")}>{toast.text}</div>
+          {toast.answerText && (
+            <div className="answer">{toast.answerText}</div>
+          )}
+        </div>
+      ) : (
+        <div className="footer">Type the missing preposition and press <strong>Enter</strong> to check.</div>
+      );
 
       return (
         <div className="app">
           <div className="header">Preposition Trainer</div>
           <div className="spacer-1"/>
+          <div className="level">
+            Level:
+            <select value={selectedLevel} onChange={handleLevelChange} style={{marginLeft: '8px', padding: '4px', borderRadius: '4px', border: '1px solid var(--accent)', background: 'var(--bg)', color: 'var(--fg)'}}>
+              {levels.map(level => <option key={level} value={level}>{level}</option>)}
+            </select>
+          </div>
 
-          {row.level && <div className="level">Level: {row.level}</div>}
-          <form className="row" aria-live="polite" onSubmit={onSubmit}>
-            <span className="before">{(before||'').trim()}&nbsp;</span>
-            <span className="inputWrap">
-              <input
-                ref={inputRef}
-                className="input"
-                autoCapitalize="off"
-                autoComplete="off"
-                autoCorrect="off"
-                spellCheck={false}
-                value={value}
-                onChange={(e)=> setValue(e.target.value.toLowerCase())}
-                style={{width: `${inputWidthCh}ch`}}
-                aria-label="Missing preposition"
-              />
-            </span>
-            <span className="after">&nbsp;{(after||'').trim()}</span>
-            <button type="submit" className="sr-only">Check</button>
-          </form>
+          {currentRow ? (
+            <form className="row" aria-live="polite" onSubmit={onSubmit}>
+              <span className="before">{(before || '').trim()}&nbsp;</span>
+              <span className="inputWrap">
+                <input
+                  ref={inputRef}
+                  className="input"
+                  autoCapitalize="off"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  spellCheck={false}
+                  value={value}
+                  onChange={(e) => setValue(e.target.value.toLowerCase())}
+                  style={{ width: `${inputWidthCh}ch` }}
+                  aria-label="Missing preposition"
+                />
+              </span>
+              <span className="after">&nbsp;{(after || '').trim()}</span>
+              <button type="submit" className="sr-only">Check</button>
+            </form>
+          ) : (
+            <div>Loading...</div>
+          )}
 
           <div className="spacer-2"/>
 
-          {/* Footer: either hint or fading result toast */}
-          {toast ? (
-            <div key={toast.key} className="footer fade2s">
-              <div className={"result "+(toast.ok?"ok":"bad")}>{toast.text}</div>
-              {toast.answerText && (
-                <div className="answer">{toast.answerText}</div>
-              )}
-            </div>
-          ) : (
-            <div className="footer">Type the missing preposition and press <strong>Enter</strong> to check.</div>
-          )}
+          {footerContent}
+
+          <details className="debug-details">
+            <summary className="debug-summary">Debug Info</summary>
+            <pre className="debug-content">
+              {currentRow && Object.entries(currentRow).map(([key, value]) => `${key}: ${value}`).join('\n')}
+            </pre>
+          </details>
         </div>
       );
     }
