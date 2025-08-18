@@ -4,6 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Preposition Trainer (React + PapaParse)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#0b0f17; --fg:#e6ebf3; --muted:#aab6cf; --ok:#46d38a; --bad:#ff6b6b; --accent:#7aa2ff;
@@ -15,15 +18,22 @@
     .spacer-1{height:40px;}
     .spacer-2{height:60px;}
     .row{white-space:nowrap; overflow-x:auto; scrollbar-width:thin;}
-    .before,.after{font:500 28px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; display:inline-block;}
+    .before,.after{font:500 28px/1.4 'Roboto Mono', monospace; display:inline-block;}
     .inputWrap{display:inline-flex; align-items:center; border:2px solid var(--accent); border-radius:10px; padding:6px 8px; margin:0 6px;}
-    .input{font:600 20px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:var(--fg); background:transparent; border:none; outline:none; width:1ch; min-width:1ch;}
+    .input{font:600 20px/1 'Roboto Mono', monospace; color:var(--fg); background:transparent; border:none; outline:none; width:1ch; min-width:1ch;}
     .level{font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--muted); margin-bottom: 20px;}
     .level-selector { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
     .level-button { background-color: transparent; border: 2px solid var(--accent); color: var(--accent); padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-size: 16px; font-weight: 500; }
     .level-button.selected { background-color: var(--accent); color: var(--bg); font-weight: 700; }
     .level-button:hover { background-color: rgba(122, 162, 255, 0.1); }
     .level-button.selected:hover { background-color: var(--accent); }
+    .action-buttons { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+    .action-button { background-color: transparent; border: 2px solid var(--muted); color: var(--muted); padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-size: 16px; font-weight: 500; }
+    .action-button:hover { background-color: rgba(170, 182, 207, 0.1); }
+    .button-container { display: flex; flex-direction: column; align-items: center; }
+    .key-hint { font-family: 'Roboto Mono', monospace; font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .action-button.submit { border-color: var(--ok); color: var(--ok); }
+    .action-button.submit:hover { background-color: rgba(70, 211, 138, 0.1); }
     .footer{font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--muted);} 
     .result{font:600 22px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin-bottom:6px;}
     .ok{color:var(--ok);} .bad{color:var(--bad);} .answer{color:#cfd8f7}
@@ -238,6 +248,17 @@ for,apply,"He applied --- a new passport yesterday."
           ) : (
             <div>Loading...</div>
           )}
+
+          <div className="action-buttons">
+            <div className="button-container">
+              <button className="action-button submit" onClick={check}>Submit</button>
+              <span className="key-hint">&lt;enter&gt;</span>
+            </div>
+            <div className="button-container">
+              <button className="action-button skip" onClick={pickRandomRow}>Skip</button>
+              <span className="key-hint">&lt;esc&gt;</span>
+            </div>
+          </div>
 
           <div className="spacer-2"/>
 
