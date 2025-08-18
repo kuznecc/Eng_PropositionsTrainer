@@ -32,6 +32,15 @@
     .action-button:hover { background-color: rgba(170, 182, 207, 0.1); }
     .button-container { display: flex; flex-direction: column; align-items: center; }
     .key-hint { font-family: 'Roboto Mono', monospace; font-size: 12px; color: var(--muted); margin-top: 4px; }
+    @media (max-width: 600px) {
+      .row {
+        white-space: normal;
+        overflow-x: visible;
+      }
+      .before, .after {
+        display: inline;
+      }
+    }
     .action-button.submit { border-color: var(--ok); color: var(--ok); }
     .action-button.submit:hover { background-color: rgba(70, 211, 138, 0.1); }
     .footer{font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--muted);} 
