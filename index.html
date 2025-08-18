@@ -9,8 +9,8 @@
       --bg:#0b0f17; --fg:#e6ebf3; --muted:#aab6cf; --ok:#46d38a; --bad:#ff6b6b; --accent:#7aa2ff;
     }
     html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);} 
-    #root{height:100%;display:flex;align-items:flex-start;justify-content:center;}
-    .app{width:min(920px,100%);padding:24px 20px 32px;}
+    #root{height:100%;display:flex;align-items:center;justify-content:center;}
+    .app{width:min(920px,100%);padding:24px 20px 32px;text-align:center;}
     .header{font:700 44px/1.2 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; text-align:center; margin-top:16px;}
     .spacer-1{height:40px;}
     .spacer-2{height:60px;}
@@ -18,6 +18,7 @@
     .before,.after{font:500 28px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; display:inline-block;}
     .inputWrap{display:inline-flex; align-items:center; border:2px solid var(--accent); border-radius:10px; padding:6px 8px; margin:0 6px;}
     .input{font:600 20px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:var(--fg); background:transparent; border:none; outline:none; width:1ch; min-width:1ch;}
+    .level{font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--muted); margin-top: -20px; margin-bottom: 20px;}
     .footer{font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--muted);} 
     .result{font:600 22px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin-bottom:6px;}
     .ok{color:var(--ok);} .bad{color:var(--bad);} .answer{color:#cfd8f7}
@@ -153,6 +154,7 @@ for,apply,"He applied --- a new passport yesterday."
           <div className="header">Preposition Trainer</div>
           <div className="spacer-1"/>
 
+          {row.level && <div className="level">Level: {row.level}</div>}
           <form className="row" aria-live="polite" onSubmit={onSubmit}>
             <span className="before">{(before||'').trim()}&nbsp;</span>
             <span className="inputWrap">
