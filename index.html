@@ -19,6 +19,11 @@
     .inputWrap{display:inline-flex; align-items:center; border:2px solid var(--accent); border-radius:10px; padding:6px 8px; margin:0 6px;}
     .input{font:600 20px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:var(--fg); background:transparent; border:none; outline:none; width:1ch; min-width:1ch;}
     .level{font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--muted); margin-bottom: 20px;}
+    .level-selector { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    .level-button { background-color: transparent; border: 2px solid var(--accent); color: var(--accent); padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-size: 16px; font-weight: 500; }
+    .level-button.selected { background-color: var(--accent); color: var(--bg); font-weight: 700; }
+    .level-button:hover { background-color: rgba(122, 162, 255, 0.1); }
+    .level-button.selected:hover { background-color: var(--accent); }
     .footer{font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--muted);} 
     .result{font:600 22px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin-bottom:6px;}
     .ok{color:var(--ok);} .bad{color:var(--bad);} .answer{color:#cfd8f7}
@@ -198,11 +203,16 @@ for,apply,"He applied --- a new passport yesterday."
         <div className="app">
           <div className="header">Preposition Trainer</div>
           <div className="spacer-1"/>
-          <div className="level">
-            Level:
-            <select value={selectedLevel} onChange={handleLevelChange} style={{marginLeft: '8px', padding: '4px', borderRadius: '4px', border: '1px solid var(--accent)', background: 'var(--bg)', color: 'var(--fg)'}}>
-              {levels.map(level => <option key={level} value={level}>{level}</option>)}
-            </select>
+          <div className="level-selector">
+            {levels.map(level => (
+              <button
+                key={level}
+                className={`level-button ${selectedLevel === level ? 'selected' : ''}`}
+                onClick={() => setSelectedLevel(level)}
+              >
+                {level}
+              </button>
+            ))}
           </div>
 
           {currentRow ? (
