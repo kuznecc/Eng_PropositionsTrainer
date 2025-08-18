@@ -144,9 +144,10 @@ for,apply,"He applied --- a new passport yesterday."
         setToast(toastData);
         if (wasOk) {
           pickRandomRow();
+        } else {
+          setValue('');
+          focusInput();
         }
-        setValue('');
-        focusInput();
       }, [currentRow, value, pickRandomRow]);
 
       React.useEffect(() => {
@@ -156,7 +157,10 @@ for,apply,"He applied --- a new passport yesterday."
       }, [toast]);
       
       const focusInput = () => setTimeout(()=> inputRef.current?.focus(), 0);
-      React.useEffect(()=>{ focusInput(); }, [currentRow]);
+      React.useEffect(()=>{
+        setValue('');
+        focusInput();
+      }, [currentRow]);
 
       const handleLevelChange = (event) => {
         setSelectedLevel(event.target.value);
@@ -167,6 +171,18 @@ for,apply,"He applied --- a new passport yesterday."
       
       const [before, after] = (currentRow?.['usage_case'] || currentRow?.['usage case'] || '').split('---');
 
+      React.useEffect(() => {
+        const handleKeyDown = (event) => {
+          if (event.key === 'Escape') {
+            pickRandomRow();
+          }
+        };
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+          document.removeEventListener('keydown', handleKeyDown);
+        };
+      }, [pickRandomRow]);
+
       const footerContent = toast ? (
         <div key={toast.key} className="footer fade2s">
           <div className={"result " + (toast.ok ? "ok" : "bad")}>{toast.text}</div>
@@ -175,7 +191,7 @@ for,apply,"He applied --- a new passport yesterday."
           )}
         </div>
       ) : (
-        <div className="footer">Type the missing preposition and press <strong>Enter</strong> to check.</div>
+        <div className="footer">Type the missing preposition and press <strong>Enter</strong> to check. Press <strong>Esc</strong> to skip.</div>
       );
 
       return (
