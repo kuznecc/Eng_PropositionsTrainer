@@ -1,315 +1,522 @@
-preposition,verb,usage case
-about,complain,She complained --- the noise next door
-about,talk,We talked --- the new project
-about,think,I am thinking --- your idea
-about,worry,Do not worry --- the exam
-about,argue,They argued --- the price
-about,dream,He dreams --- moving abroad
-about,hear,I heard --- the concert
-about,read,She read --- the discovery yesterday
-about,write,He wrote --- the results
-about,care,She cares --- her team a lot
-about,laugh,We laughed --- the mistake later
-about,joke,He joked --- his cooking
-about,know,Do you know --- this rule
-about,learn,We learned --- the change today
-about,tell,Please tell me --- your plans
-about,forget,He forgot --- the meeting
-about,remind,Please remind me --- the deadline
-about,warn,They warned us --- the risk
-about,boast,He boasted --- his victory
-about,decide,We must decide --- the strategy
-
-for,apologize,She apologized --- the delay
-for,apply,He applied --- the job last week
-for,ask,I will ask --- directions
-for,pay,We paid --- the tickets
-for,prepare,They prepared --- the trip
-for,search,We searched --- the file
-for,wait,She waited --- an hour
-for,wish,He wished --- a quiet weekend
-for,hope,We hope --- good weather
-for,vote,They voted --- the proposal
-for,blame,Do not blame me --- the error
-for,care,She cares --- the elderly
-for,forgive,Please forgive me --- the confusion
-for,stand,This symbol stands --- peace
-for,qualify,He qualified --- the finals
-for,sue,They sued --- damages
-for,thank,I thanked him --- the help
-for,compete,We will compete --- the prize
-for,negotiate,They negotiated --- a better rate
-for,plan,We planned --- the future event
-
-to,belong,This book belongs --- Anna
-to,listen,Please listen --- the instructions
-to,refer,He referred --- the manual
-to,respond,She responded --- the email
-to,talk,I talked --- my manager
-to,speak,She spoke --- the class
-to,object,He objected --- the change
-to,agree,We agreed --- the terms
-to,consent,They consented --- the test
-to,contribute,He contributed --- the fund
-to,lead,This path leads --- the river
-to,relate,The story relates --- our work
-to,reply,She replied --- my message
-to,subscribe,He subscribed --- the channel
-to,travel,We traveled --- the coast
-to,move,They moved --- a new city
-to,go,We will go --- the museum
-to,return,She returned --- the office
-to,compare,They compared it --- the old model
-to,admit,He admitted --- the mistake
-
-with,agree,I agree --- your point
-with,argue,She argued --- her brother
-with,dealt,We dealt --- the issue quickly
-with,help,He helped --- the report
-with,interfere,Do not interfere --- the process
-with,compete,They compete --- each other
-with,compare,We compared this --- that
-with,comply,Please comply --- the rules
-with,connect,It connects --- the network
-with,converse,She conversed --- the guests
-with,cope,He coped --- the pressure
-with,correspond,We correspond --- clients often
-with,fight,They fought --- courage
-with,play,She played --- the kids
-with,stay,He stayed --- his friends
-with,work,We work --- partners worldwide
-with,speak,She spoke --- confidence
-with,chat,We chatted --- the neighbors
-with,struggle,He struggles --- time management
-with,sympathize,I sympathize --- your loss
-
-on,depend,We depend --- your support
-on,focus,Please focus --- the goal
-on,insist,She insisted --- paying
-on,rely,He relies --- his notes
-on,count,You can count --- me
-on,work,They worked --- the design
-on,bet,He bet --- the home team
-on,call,We called --- our suppliers
-on,concentrate,Please concentrate --- the task
-on,decide,We decided --- a plan
-on,comment,She commented --- the report
-on,elaborate,Please elaborate --- that point
-on,expand,They expanded --- the idea
-on,report,We reported --- the issue
-on,check,He checked --- the status
-on,plan,They plan --- moving soon
-on,move,Let us move --- the next item
-on,base,We base this --- facts
-on,vote,They voted --- the motion
-on,draw,He drew --- his experience
-
-in,believe,She believes --- herself
-in,engage,They engage --- open debate
-in,invest,He invested --- clean energy
-in,participate,We participate --- the event
-in,specialize,The lab specializes --- robotics
-in,succeed,She succeeded --- her role
-in,trust,He trusts --- his team
-in,result,The delay resulted --- a loss
-in,involve,They involved us --- the review
-in,include,Please include me --- the email
-in,confide,She confided --- a friend
-in,persist,He persisted --- his efforts
-in,delight,She delights --- small joys
-in,enroll,He enrolled --- a course
-in,assist,We assist you --- this task
-in,excel,They excel --- math
-in,train,She trains --- data analysis
-in,instruct,He instructs interns --- safety
-in,fail,They failed --- basic checks
-in,participated,He participated --- many trials
-
-at,aim,We aim --- higher quality
-at,arrive,They arrived --- noon
-at,laugh,She laughed --- the joke
-at,look,He looked --- the screen
-at,guess,We guessed --- the answer
-at,hint,She hinted --- a surprise
-at,shout,He shouted --- the driver
-at,smile,She smiled --- the child
-at,stare,They stared --- the painting
-at,excel,He excels --- chess
-at,work,She works --- night
-at,win,They win --- chess often
-at,throw,He threw it --- the target
-at,yell,She yelled --- her phone
-at,poke,He poked --- the fire
-at,shoot,They shot --- the goal
-at,glance,She glanced --- the clock
-at,glare,He glared --- the screen
-at,snap,She snapped --- me in anger
-at,bark,The dog barked --- strangers
-
-from,benefit,We benefit --- this plan
-from,come,This idea came --- the team
-from,differ,It differs --- the old one
-from,escape,He escaped --- danger
-from,graduate,She graduated --- college
-from,recover,He recovered --- illness
-from,resign,She resigned --- the board
-from,retire,He retired --- service
-from,separate,They separated it --- the rest
-from,suffer,He suffers --- allergies
-from,emerge,The truth emerged --- the audit
-from,hide,She hid --- the rain
-from,learn,We learn --- mistakes
-from,prevent,They prevent us --- entering
-from,protect,This protects you --- harm
-from,refrain,Please refrain --- smoking
-from,remove,They removed it --- the list
-from,save,He saved us --- trouble
-from,stem,It stems --- a rule
-from,subtract,Please subtract five --- the total
-
-of,approve,They approve --- the plan
-of,think,I think --- a solution
-of,hear,We heard --- the update
-of,dream,He dreamed --- success
-of,dispose,They disposed --- waste safely
-of,consist,The team consists --- five people
-of,accuse,They accused him --- theft
-of,assure,She assured me --- help
-of,beware,Beware --- scams online
-of,boast,He boasted --- his skill
-of,convict,They convicted her --- fraud
-of,die,He died --- old age
-of,rid,They rid the room --- dust
-of,remind,This reminds me --- home
-of,rob,Thieves robbed him --- cash
-of,suspect,They suspect her --- lying
-of,tire,He tired --- the routine
-of,warn,They warned us --- danger
-of,inform,Please inform me --- any change
-of,cure,The treatment cured him --- fear
-
-into,look,We will look --- the issue
-into,run,He ran --- an old friend
-into,bump,She bumped --- the chair
-into,check,They checked --- the hotel
-into,break,Thieves broke --- the house
-into,go,We went --- the shop
-into,get,He got --- trouble
-into,translate,We translated it --- Spanish
-into,turn,The rain turned roads --- ice
-into,dive,She dived --- the pool
-into,dig,They dug --- the data
-into,crash,The car crashed --- a wall
-into,convert,We converted euros --- dollars
-into,enter,They entered --- a contract
-into,split,We split it --- parts
-into,feed,The data feeds --- the model
-into,pour,He poured water --- the glass
-into,fit,It fits --- the box
-into,plug,Please plug it --- the socket
-into,throw,He threw it --- the bin
-
-against,argue,They argued --- the proposal
-against,fight,He fought --- the decision
-against,protest,People protested --- the law
-against,compete,We compete --- strong teams
-against,discriminate,Do not discriminate --- anyone
-against,guard,We guard --- theft
-against,lean,He leaned --- the wall
-against,react,They reacted --- the plan
-against,rebel,Students rebelled --- the rule
-against,vote,They voted --- the change
-against,warn,We warned them --- scams
-against,advise,She advised us --- rushing
-against,defend,We defended --- the attack
-against,protect,It protects --- corrosion
-against,insure,They insured --- loss
-against,campaign,She campaigned --- pollution
-against,conspire,They conspired --- the leader
-against,testify,He testified --- the suspect
-against,legislate,They legislated --- fraud
-against,safeguard,We safeguard --- errors
-
-over,argue,They argued --- money
-over,fight,He fought --- a seat
-over,fuss,She fussed --- details
-over,think,I will think --- it
-over,talk,We talked --- the plan
-over,watch,He watched --- the kids
-over,worry,She worried --- nothing
-over,pore,They pored --- the notes
-over,preside,He presided --- the meeting
-over,negotiate,They negotiated --- terms
-over,trip,She tripped --- a cable
-over,hand,He handed it --- to you
-over,take,They took --- the company
-over,mull,He mulled --- the offer
-over,quarrel,They quarreled --- land
-over,obsess,Do not obsess --- numbers
-over,bicker,They bickered --- chores
-over,brood,He brooded --- the loss
-over,stress,She stressed --- minor things
-over,agonize,Do not agonize --- the choice
-
-under,come,We came --- pressure
-under,fall,Sales fell --- expectations
-under,suffer,They suffered --- heavy taxes
-under,work,He works --- a strict boss
-under,operate,The system operates --- load
-under,act,She acted --- orders
-under,break,The beam broke --- weight
-under,collapse,The tent collapsed --- wind
-under,groan,The floor groaned --- strain
-under,strain,They strained --- constant demand
-under,live,We live --- the same roof
-under,labor,He labors --- rules
-under,serve,She serves --- the director
-under,trade,They trade --- a local name
-under,stay,Please stay --- cover
-under,wait,We waited --- the bridge
-under,hide,He hid --- the table
-under,huddle,They huddled --- blankets
-under,crouch,She crouched --- the tree
-under,study,He studies --- supervision
-
-between,choose,We must choose --- two options
-between,divide,They divided the cake --- them
-between,distinguish,Can you distinguish --- fact and opinion
-between,differentiate,We differentiate --- types
-between,mediate,She mediated --- the sides
-between,negotiate,They negotiated --- partners
-between,alternate,He alternates --- tasks
-between,balance,We balance time --- work and family
-between,oscillate,The signal oscillates --- limits
-between,switch,You can switch --- modes
-between,decide,They decided --- two routes
-between,move,Data moves --- servers
-between,travel,He travels --- cities
-between,toggle,Please toggle --- views
-between,flip,She flipped --- pages
-between,jump,They jumped --- topics
-between,shuttle,He shuttles --- offices
-between,arbitrate,She arbitrated --- teams
-between,hop,We hopped --- islands
-between,rotate,The role rotates --- members
-
-among,divide,They divided the tasks --- the team
-among,distribute,We distributed flyers --- people
-among,share,She shared food --- friends
-among,spread,The rumor spread --- students
-among,select,We selected one --- many options
-among,choose,They chose one --- the rest
-among,circulate,The memo circulated --- staff
-among,rank,He ranks high --- peers
-among,hide,He hid --- the crowd
-among,live,They live --- kind neighbors
-among,move,The cat moved --- the boxes
-among,mingle,She mingled --- guests
-among,place,We placed him --- the best
-among,count,He counts --- the experts
-among,number,She numbers --- the top five
-among,sit,He sat --- friends
-among,blend,The color blends --- shades
-among,scatter,Leaves scattered --- the yard
-among,allocate,We allocated funds --- teams
-among,split,They split profits --- partners
+level,verb,preposition,usage_case,meaning
+C1,excel,in,She excels --- mathematics.,perform exceptionally well in something
+B2,train,in,Doctors train --- emergency procedures.,receive or practice professional preparation
+A,tell,about,She told me --- the changes at work.,-
+B1,decide,about,We need to decide --- the venue today.,make a choice concerning something
+A,matter,to,It does not matter --- me what you choose.,be important to someone
+A,pray,for,They prayed --- peace and safety for everyone.,make a request to God or deity
+A,stop,from,She stopped him --- leaving the room.,prevent someone from doing something
+B1,agree,about,I agree --- you about the importance of honesty.,-
+B1,decide,against,They decided --- going on the trip despite the risks.,choose not to do something
+B1,long,for,She longed --- a peaceful life in the countryside.,yearn deeply for something
+A,congratulate,on,We congratulated her --- winning the award.,express joy for someone’s success
+B1,wish,for,He wished --- a quiet weekend.,desire or hope for something
+B2,stand,for,This symbol stands --- freedom.,represent or symbolize something
+B2,qualify,for,She finally qualified --- the finals.,meet conditions for eligibility
+C1,sue,for,They plan to sue --- damages.,take legal action to claim
+C1,negotiate,for,The team negotiated --- better terms.,bargain to achieve something
+B1,plan,for,You should plan --- possible delays.,-
+A,move,to,They moved --- a new apartment last month.,-
+B2,dealt,with,He dealt --- the complaint promptly.,handle or manage a situation
+C1,converse,with,I prefer to converse --- experts directly.,-
+B2,correspond,with,She corresponds --- clients weekly.,-
+A,fight,with,He often fights --- his brother over chores.,-
+A,chat,with,Let us chat --- the designer after lunch.,-
+B2,struggle,with,Many students struggle --- time management.,face difficulties managing something
+B2,bet,on,He bet --- the underdog to win.,risk money predicting an outcome
+B2,call,on,The teacher called --- Maria to answer.,request or invite someone to speak/act
+C1,expand,on,Could you expand --- your last point?,give more details about something
+B2,report,on,Journalists reported --- the election results.,-
+B1,check,on,Please check --- the children before we leave.,ensure someone/something is safe
+B1,move,on,It is time to move --- to the next topic.,proceed to the next thing
+B2,vote,on,We will vote --- the proposal tomorrow.,-
+C1,draw,on,The author draws --- personal experience.,use something as a resource
+B1,include,in,Please include me --- the email thread.,to add someone or something
+C1,persist,in,He persisted --- asking the same question.,continue firmly despite difficulty
+C1,delight,in,She delights --- solving puzzles.,gain joy or satisfaction from something
+B2,enroll,in,I enrolled --- a cooking class.,register or sign up for
+C1,assist,in,They assisted --- the rescue operation.,help or support in an activity
+B2,acquaint,with,He acquainted me --- the new procedures.,Introduce or make familiar
+B2,adapt,from,The play was adapted --- the novel.,Modify to fit new form
+B2,adhere,to,We must adhere --- the rules.,Follow strictly
+B2,appeal,to,This story appeals --- children.,Attract or interest
+B2,arise,from,Health problems can arise --- stress.,Originate or result
+B2,associate,with,I associate this smell --- my childhood.,Connect mentally
+B2,attend,to,Please attend --- the patient.,Give care or attention
+B2,compose,of,The committee is composed --- experts.,Consist of
+B2,confuse,about,Don’t confuse this issue --- politics.,Misunderstand relation
+B2,confront,with,She confronted him --- the evidence.,Challenge or face directly
+B2,convince,of,He convinced me --- his honesty.,Persuade or assure
+B2,face,with,She had to face life --- courage.,Deal bravely
+B2,feed,on,Bats feed --- insects at night.,Eat as food
+B2,indulge,in,He indulges --- sweets too much.,Allow oneself pleasure
+B2,insist,upon,She insisted --- paying the bill.,Demand firmly
+B2,limit,to,You should limit sugar --- small amounts.,Restrict within bounds
+B2,prevail,over,Truth will prevail --- lies.,Triumph
+B2,provide,against,The treaty provides --- possible attacks.,Make provision against
+B2,reflect,on,She reflected --- her childhood memories.,Think deeply
+B2,replace,with,You can replace this word --- a synonym.,Exchange one for another
+B2,supply,with,They supplied the army --- food.,Furnish or equip
+C1,abide,by,We must abide --- the decision.,Obey or accept
+C1,account,for,She accounted --- every dollar spent.,Explain or justify
+C1,act,on,We must act --- his advice.,Follow advice or direction
+C1,bank,on,You can always bank --- his support.,Rely confidently
+C1,broker,for,He brokered a deal --- the company.,Arrange negotiations
+C1,cater,to,This shop caters --- young people.,Provide service or satisfy
+C1,concur,with,I concur --- your opinion.,Agree
+C1,conform,with,You must conform --- the law.,Comply or match
+C1,contend,for,They contend --- the prize.,Compete for
+C1,contravene,with,His actions contravene --- the rules.,Act against rules
+C1,debate,on,The team debated --- the plan.,Discuss formally
+C1,delve,into,The report delved --- the details.,Explore deeply
+C1,deprive,of,They deprived him --- his rights.,Take away rights or possessions
+C1,embark,on,They embarked --- a long journey.,Start a journey or project
+B2,beware,of,Beware --- scams online,be cautious or alert regarding
+B2,boast,of,He boasted --- his skill,speak proudly about something
+C1,convict,of,They convicted her --- fraud,declare guilty of a crime
+B2,rid,of,They rid the room --- dust,eliminate or free from something
+B2,tire,of,He tired --- the routine,become bored or weary of something
+B1,warn,of,They warned us --- danger,inform about possible harm or risk
+C1,instruct,in,He was instructed --- safe handling.,given directions or taught in
+B2,fail,in,They failed --- their attempt to break the record.,be unsuccessful at
+B1,participated,in,Hundreds participated --- the marathon.,-
+B2,guess,at,We guessed --- the answer,make an estimate without certainty
+A,work,at,She works --- night,-
+A,win,at,They win --- chess often,-
+A,throw,at,He threw it --- the target,-
+B1,yell,at,She yelled --- her phone,-
+B2,poke,at,He poked --- the fire,-
+B1,shoot,at,They shot --- the goal,-
+B2,glare,at,He glared --- the screen,-
+B2,snap,at,She snapped --- me in anger,-
+B1,bark,at,The dog barked --- strangers,-
+A,learn,from,We learn --- mistakes,-
+A,remove,from,They removed it --- the list,-
+B1,subtract,from,Please subtract five --- the total,-
+B2,dispose,of,They disposed --- waste safely,dispose properly or get rid of
+C1,assure,of,She assured me --- help,promise or guarantee
+B2,inform,of,Please inform me --- any change,notify or make aware
+C1,cure,of,The treatment cured him --- fear,remove or free from something
+B1,run,into,He ran --- an old friend,meet by chance
+B1,bump,into,She bumped --- the chair,-
+B1,check,into,They checked --- the hotel,register at or arrive
+B2,break,into,Thieves broke --- the house,enter forcefully
+B1,go,into,We went --- the shop,-
+B1,get,into,He got --- trouble,become involved with or start
+B1,turn,into,The rain turned roads --- ice,transform or change
+B2,dive,into,She dived --- the pool,-
+B2,dig,into,They dug --- the data,examine thoroughly
+B1,crash,into,The car crashed --- a wall,-
+B2,convert,into,We converted euros --- dollars,change one form to another
+C1,enter,into,They entered --- a contract,formally agree to or start
+B1,split,into,We split it --- parts,-
+B2,feed,into,The data feeds --- the model,supply as input
+B1,pour,into,He poured water --- the glass,-
+B1,fit,into,It fits --- the box,-
+A,plug,into,Please plug it --- the socket,-
+B1,throw,into,He threw it --- the bin,-
+B2,argue,against,They argued --- the proposal,-
+A,fight,against,He fought --- the decision,-
+B1,protest,against,People protested --- the law,-
+B1,compete,against,We compete --- strong teams,-
+C1,discriminate,against,Do not discriminate --- anyone,-
+B2,guard,against,We guard --- theft,protect or defend
+A,lean,against,He leaned --- the wall,-
+C1,react,against,They reacted --- the plan,Respond negatively or in opposition
+B2,rebel,against,Students rebelled --- the rule,Rise in opposition or resistance
+B1,advise,against,She advised us --- rushing,Recommend avoiding something
+B1,defend,against,We defended --- the attack,Protect by resisting or opposing
+A,protect,against,It protects --- corrosion,Keep safe from harm
+B2,insure,against,They insured --- loss,Arrange protection from risk
+B2,campaign,against,She campaigned --- pollution,Work to oppose publicly
+C1,conspire,against,They conspired --- the leader,Secretly plan to oppose
+C1,testify,against,He testified --- the suspect,Give evidence opposing someone
+C1,legislate,against,They legislated --- fraud,Make laws to prevent something
+B2,safeguard,against,We safeguard --- errors,Ensure protection from harm
+B1,argue,over,They argued --- money,Dispute verbally
+A,fight,over,He fought --- a seat,Engage in physical or verbal struggle
+B1,fuss,over,She fussed --- details,Show unnecessary concern
+B1,think,over,I will think --- it,Consider carefully before deciding
+A,talk,over,We talked --- the plan,Discuss in detail
+B1,watch,over,He watched --- the kids,Guard or keep watch
+A,worry,over,She worried --- nothing,Feel anxiety or concern
+C1,pore,over,They pored --- the notes,Study something carefully
+B2,preside,over,He presided --- the meeting,Be in authority over
+B2,negotiate,over,They negotiated --- terms,Discuss to reach agreement
+A,trip,over,She tripped --- a cable,-
+A,hand,over,He handed it --- to you,Transfer possession or control
+A,take,over,They took --- the company,Gain control of something
+B2,mull,over,He mulled --- the offer,Reflect deeply
+B1,quarrel,over,They quarreled --- land,Dispute angrily
+C1,hinge,on,The decision hinges --- cost.,Depend entirely
+C1,laments,over,She laments --- the lost opportunity.,Express sorrow
+C1,marvel,at,He marveled --- her talent.,Feel wonder
+C1,mingle,with,She mingled --- the guests.,Socialize with others
+C1,pertain,to,These documents pertain --- the case.,Relate or apply to
+C1,prevail,upon,He prevailed --- his friend to help.,Persuade successfully
+C1,reckon,on,You can reckon --- his loyalty.,Depend or rely
+C1,reckon,with,She had to reckon --- the risks.,Consider or handle
+C1,differentiate,between,We differentiate --- types,distinguish or set apart
+C1,mediate,between,She mediated --- the sides,intervene to resolve conflict
+B2,negotiate,between,They negotiated --- partners,discuss terms with both sides
+B2,alternate,between,He alternates --- tasks,take turns repeatedly
+A,applaud,for,The audience applauded --- her outstanding performance.,Express approval or praise
+C1,obsess,over,Do not obsess --- numbers,Be excessively preoccupied
+B2,bicker,over,They bickered --- chores,Argue about trivial things
+B2,brood,over,He brooded --- the loss,Dwell gloomily on something
+B2,stress,over,She stressed --- minor things,Emphasize importance of something
+C1,agonize,over,Do not agonize --- the choice,Worry intensely about decision
+A,come,under,We came --- pressure,Experience strong external influence
+A,fall,under,Sales fell --- expectations,Be classified or included
+A,suffer,under,They suffered --- heavy taxes,Endure hardship or suffering
+A,work,under,He works --- a strict boss,Be employed by someone
+B1,operate,under,The system operates --- load,Function in conditions
+B1,act,under,She acted --- orders,Behave according to instruction
+A,break,under,The beam broke --- weight,-
+A,collapse,under,The tent collapsed --- wind,-
+B1,groan,under,The floor groaned --- strain,-
+A,live,under,We live --- the same roof,-
+B1,labor,under,He labors --- rules,Perform duties in constraint
+A,serve,under,She serves --- the director,Work under authority of
+B2,trade,under,They trade --- a local name,Do business using condition
+A,stay,under,Please stay --- cover,-
+A,wait,under,We waited --- the bridge,-
+A,hide,under,He hid --- the table,-
+A,huddle,under,They huddled --- blankets,-
+B1,crouch,under,She crouched --- the tree,-
+A,divide,between,They divided the cake --- them,separate or distribute into parts
+B1,balance,between,We balance time --- work and family,maintain equilibrium of two things
+C1,oscillate,between,The signal oscillates --- limits,swing back and forth
+B1,switch,between,You can switch --- modes,change from one to another
+B1,decide,between,They decided --- two routes,make a choice
+A,move,between,Data moves --- servers,-
+A,travel,between,He travels --- cities,-
+B2,flip,between,She flipped --- pages,-
+B1,jump,between,They jumped --- topics,change suddenly from one to another
+B2,shuttle,between,He shuttles --- offices,transport repeatedly back and forth
+C1,arbitrate,between,She arbitrated --- teams,judge to resolve a dispute
+B1,hop,between,We hopped --- islands,-
+B2,rotate,between,The role rotates --- members,take turns in succession
+B1,divide,among,They divided the tasks --- the team,separate tasks fairly
+B1,distribute,among,We distributed flyers --- people,hand out to multiple people
+A,share,among,She shared food --- friends,-
+B1,spread,among,The rumor spread --- students,circulate or spread widely
+A,choose,among,They chose one --- the rest,select from a group
+B2,circulate,among,The memo circulated --- staff,send around within a group
+B2,rank,among,He ranks high --- peers,relative position in comparison
+A,hide,among,He hid --- the crowd,conceal within a group
+A,live,among,They live --- kind neighbors,-
+A,move,among,The cat moved --- the boxes,-
+B1,mingle,among,She mingled --- guests,socialize within a group
+A,place,among,We placed him --- the best,assign or categorize within group
+B1,count,among,He counts --- the experts,be considered as part of group
+A,sit,among,He sat --- friends,-
+B2,blend,among,The color blends --- shades,merge smoothly with surroundings
+B1,scatter,among,Leaves scattered --- the yard,spread irregularly around
+B2,allocate,among,We allocated funds --- teams,assign resources fairly
+B1,split,among,They split profits --- partners,divide and share parts
+C1,reconcile,with,She reconciled --- her friend.,Restore friendship
+C1,remonstrate,with,He remonstrated --- the manager.,Protest strongly
+C1,subscribe,for,He subscribed --- the new journal.,Register as participant
+C1,tamper,with,Someone tampered --- the evidence.,Interfere improperly
+C1,tinker,with,He tinkered --- the broken radio.,Repair or adjust clumsily
+C1,veer,from,The car veered --- the road.,Turn aside suddenly
+C1,veer,toward,The car veered --- the left.,Turn direction
+C1,venture,into,They ventured --- the cave.,Dare to enter
+C1,vy,for,Teams vie --- the trophy.,Compete keenly
+C1,withhold,from,He withheld evidence --- the court.,Refuse to give
+C1,yearn,after,She yearned --- her lost love.,Long strongly
+C1,zero in,on,He zeroed in --- the target.,Direct attention precisely
+C1,reconcile,to,He reconciled himself --- the situation.,Accept difficult reality
+C1,redound,to,Success redounds --- the whole team.,Bring credit to
+C1,reflect,upon,She reflected --- her mistakes.,Think carefully
+B2,exempt,from,They are exempt --- taxes.,Free from obligation
+B2,fill,with,Fill the glass --- water.,-
+B2,impose,on,Don’t impose your will --- others.,Force unfairly
+B2,interfere,in,Don’t interfere --- their quarrel.,Intrude
+B2,investigate,into,The police will investigate --- the case.,Examine closely
+B2,phase,out,Old products are phased --- with time.,Eliminate gradually
+B2,prohibit,from,They prohibit smoking --- the building.,Forbid by authority
+B2,reduce,to,The medicine reduced his pain --- half.,Lessen to smaller amount
+B2,refer back,to,He referred back --- his earlier argument.,Refer again
+B2,substitute,for,You can substitute butter --- oil.,Replace one with another
+B2,thrive,on,Flowers thrive --- sunlight.,Flourish
+B2,yearn,for,She yearned --- freedom.,Desire strongly
+C1,accede,to,He acceded --- their request.,Agree reluctantly
+C1,acquiesce,in,He acquiesced --- their demands.,Consent passively
+B2,connect,to,She tried --- her old friends after many years.,reconnect or reestablish relation
+C1,allude,to,He alluded --- his past experiences.,Mention indirectly
+C1,avert,from,He averted his eyes --- the accident.,Turn away
+C1,bar,from,They barred him --- entering.,Exclude from
+C1,cater,for,The hotel caters --- families.,Provide service for
+C1,coincide,with,The results coincide --- our expectations.,Occur simultaneously
+C1,commiserate,with,She commiserated --- him about his loss.,Sympathize
+C1,connive,at,He connived --- the plot.,Overlook deliberately
+C1,contend,with,She contended --- her rivals.,Struggle against
+C1,debate,about,They debated --- the issue for hours.,Discuss at length
+C1,deliver,on,He delivered --- his promise.,Fulfill promise
+C1,depart,from,She departed --- the city at dawn.,-
+C1,deride,as,Critics derided him --- a fool.,Mock as
+C1,detract,from,The noise detracts --- the beauty.,Diminish value
+B2,provide,with,The company will provide us --- all the necessary tools.,supply with what is needed
+A,marry,to,She married --- a man from Italy.,-
+B1,apply,to,He applied --- three different universities.,submit formal request
+B1,borrow,from,I borrowed this book --- the library.,-
+B1,invite,for,We invited them --- dinner.,-
+B1,result,from,The damage resulted --- the storm.,be caused by
+B1,work,toward,She is working --- her degree.,make progress toward goal
+B1,object,to,Many people objected --- the new law.,express disapproval
+B2,compensate,for,They compensated him --- the loss.,Make up for loss
+B2,conform,to,You must conform --- the regulations.,Comply with rules
+B2,confuse,with,I often confuse her --- her sister.,Mistake one for another
+B2,contrast,with,This color contrasts sharply --- that one.,Differ strikingly
+B2,credit,with,They credited her --- the discovery.,Attribute credit
+C1,entrust,to,She entrusted the work --- him.,Assign task
+C1,exonerate,from,He was exonerated --- blame.,Clear from blame
+C1,impute,to,She imputed the error --- him.,Attribute to
+C1,ingratiate,with,He tried to ingratiate himself --- the boss.,Gain favor
+C1,loom,over,Dark clouds loomed --- the city.,Threaten above
+C1,meddle,in,Don’t meddle --- their affairs.,Interfere inappropriately
+C1,offset,against,The loss was offset --- the gain.,Balance against
+C1,persevere,with,She persevered --- the hard times.,Persist steadily
+C1,pronounce,on,The judge pronounced --- the case.,Give formal judgment
+C1,rail,against,They railed --- injustice.,Complain bitterly
+A,go,to,We went --- the park.,-
+A,think,about,I am thinking --- your idea.,considering or reflecting on
+A,search,for,He searched --- his lost wallet.,trying to find
+A,speak,with,She spoke --- confidence,-
+A,listen,to,Please listen --- the teacher carefully.,-
+A,hope,for,I hope --- good weather tomorrow.,wish for something
+A,refer,to,He referred --- the manual,mention or point to
+A,apologize,for,She apologized --- being late.,express regret about
+A,forget,about,I forgot --- the meeting.,fail to remember
+A,work,on,They work --- a big project.,engaged in doing
+A,care,about,He cares --- his health.,have concern for
+A,concentrate,on,Please concentrate --- the task,focus attention on
+A,prepare,for,They prepared --- the trip.,get ready for
+A,complain,about,She complained --- the noise.,express dissatisfaction
+A,worry,about,Don’t worry --- the exam.,be anxious about
+A,help,with,Can you help me --- this problem?,-
+B1,argue,about,They argued --- the price,quarrel over something
+B2,laugh,about,We laughed --- the mistake later,find humor in
+B2,joke,about,He joked --- his cooking,make a joke on
+B1,know,about,Do you know --- this rule,be informed about
+B2,remind,about,Please remind me --- the deadline,cause someone to recall
+B1,warn,about,They warned us --- the risk,alert someone to
+B2,boast,about,He boasted --- his victory,talk proudly about
+B1,vote,for,They voted --- the proposal,-
+B1,blame,for,Do not blame me --- the error,hold responsible for
+B2,forgive,for,Please forgive me --- the confusion,pardon someone for
+B2,compete,for,We will compete --- the prize,strive to win
+B1,respond,to,She responded --- the email,-
+B2,consent,to,They consented --- the test,agree or give permission
+B1,contribute,to,He contributed --- the fund,give or add to
+B1,lead,to,This path leads --- the river,result in
+B1,relate,to,The story relates --- our work,connect or associate with
+A,reply,to,She replied --- my message,-
+C1,vouch,for,I can vouch --- his honesty and reliability.,guarantee truth or reliability
+C1,abase oneself,before,He refused to abase himself --- anyone.,lower or humble oneself
+A,read,about,I read --- the new law yesterday.,-
+A,speak,to,He spoke --- his boss.,-
+A,work,with,We work --- partners worldwide,-
+A,talk,about,They talked --- the new project.,discussing a subject
+A,believe,in,I believe --- hard work.,trusting or having faith in
+A,ask,for,I asked --- more information.,requesting something
+A,write,about,I wrote --- my holiday in the diary.,describing in writing
+A,hear,about,I heard --- the accident.,receiving news of
+A,belong,to,This book belongs --- me.,-
+A,pay,for,She paid --- the tickets.,-
+A,wait,for,We are waiting --- the bus.,-
+A,play,with,She played --- the kids,-
+A,apply,for,He applied --- the job last week,submit an application
+A,compare,with,We compared this --- that,examining similarities/differences
+A,rely,on,He relies --- his notes,depend on for support
+B1,subscribe,to,He subscribed --- the channel,-
+B1,compare,to,They compared it --- the old model,liken it to another
+B2,admit,to,He admitted --- the mistake,confess to doing
+A,argue,with,She argued --- her brother,-
+B1,interfere,with,Do not interfere --- the process,hinder or obstruct
+B2,compete,with,They compete --- each other,-
+B2,comply,with,Please comply --- the rules,Follow or obey
+B1,connect,with,It connects --- the network,-
+B2,cope,with,He coped --- the pressure,Handle or manage
+A,stay,with,He stayed --- his friends,-
+A,learn,about,We learned --- the history of Rome.,Gain knowledge
+B2,sympathize,with,I sympathize --- your loss,Feel compassion
+A,focus,on,Please focus --- the goal,Direct attention
+B1,insist,on,She insisted --- paying,Demand firmly
+A,count,on,You can count --- me,Rely or depend
+B1,decide,on,We decided --- a plan,Choose or settle
+A,dream,about,She dreams --- traveling the world.,Imagine future events
+B1,comment,on,She commented --- the report,Express an opinion
+B2,elaborate,on,Please elaborate --- that point,Explain in detail
+A,plan,on,They plan --- moving soon,Intend or prepare
+B1,base,on,We base this --- facts,Establish foundation
+A,care,for,She cares --- her younger brother.,Look after
+A,thank,for,He thanked me --- my help.,Express gratitude
+A,travel,to,They traveled --- Italy.,-
+A,agree,to,He agreed --- help me.,Consent
+A,return,to,I returned --- my hometown.,-
+B2,accustom,to,She quickly accustomed herself --- the cold climate.,Become used to new conditions
+B2,appeal,for,The charity appealed --- donations.,Request earnestly
+B2,blame,on,He blamed the failure --- bad planning.,Assign fault
+B2,discourage,from,The teacher discouraged him --- cheating.,Dissuade
+B2,phase,in,The new rules will be phased --- gradually.,Introduce gradually
+B2,withdraw,from,He withdrew --- the competition.,Remove oneself
+C1,apprise,of,She apprised him --- the situation.,Inform or notify
+C1,collude,with,They colluded --- each other in fraud.,Secretly cooperate
+C1,descend,on,The army descended --- the town.,Attack suddenly
+C1,entrust,with,She entrusted him --- the keys.,Assign responsibility
+B1,specialize,in,The lab specializes --- robotics,Concentrate expertise
+C1,glance,at,She glanced --- the clock,-
+B2,retire,from,He retired --- service,Leave a job permanently
+B1,trust,in,He trusts --- his team,Have confidence
+B2,get rid,of,She wants to get rid --- her old clothes.,Remove or eliminate
+B2,begin,with,Let’s begin --- a short introduction.,-
+C1,engross,in,He was engrossed --- the book and didn’t notice the time.,Deeply involved in something
+C1,protest,about,They protested --- unfair treatment.,-
+A,choose,between,We must choose --- two options,-
+A,succeed,in,She succeeded --- her role,Achieve a goal or result
+B2,absorb,in,She was absorbed --- her thoughts.,Fully occupied mentally
+B1,result,in,The delay resulted --- a loss,Cause outcome
+B2,bring,about,The new law brought --- significant changes.,Cause to happen
+B2,fight,for,They fought --- their rights.,-
+A,shout,at,He shouted --- the driver,-
+C1,concern,with,This article is concerned --- climate change.,Related to or dealing with
+A,point,at,Don’t point --- people; it’s rude.,-
+A,explain,to,He explained the problem --- me in detail.,-
+C1,disagree,with,I disagree --- your opinion.,-
+C1,abased,by,He felt abased --- their harsh words.,Humiliated or degraded
+A,read,in,He read the announcement --- the newspaper.,-
+A,talk,with,I need to talk --- my teacher after class.,-
+A,watch,for,You should watch --- falling rocks near the cliff.,Be alert to detect something
+A,hear,of,We heard --- the update,-
+A,go,for,Let’s go --- a walk in the park.,-
+A,go,on,Please go --- with your story.,Continue happening or speaking
+B1,provide,for,This program provides food --- those in need.,Supply needs for someone
+A,write,to,She wrote --- her friend.,-
+A,look,at,She looked --- the painting.,-
+A,look,for,He is looking --- his keys.,Search for something
+A,fall,down,Be careful not to fall --- the stairs.,-
+A,spend,on,He spent money --- clothes.,-
+A,smile,at,She smiled --- the child,-
+B1,object,at,He strongly objected --- the unfair decision.,Express opposition
+A,feel,about,She feels bad --- the mistake.,Opinion or attitude towards something
+B2,engage,in,They engage --- open debate,Participate actively
+B1,invest,in,He invested --- clean energy,Put money into
+B1,adapt,to,It took her a while to adapt --- the new environment.,Adjust or change
+C1,involve,in,They involved us --- the review,Include participation
+B2,confide,in,She confided --- a friend,Share privately
+B2,aim,at,We aim --- higher quality,Direct toward
+A,protect,from,This protects you --- harm,-
+C1,hint,at,She hinted --- a surprise,Suggest indirectly
+A,stare,at,They stared --- the painting,-
+B2,excel,at,He excels --- chess,Be outstanding
+B1,benefit,from,We benefit --- this plan,Gain advantage
+B1,belong,in,"This book belongs --- me, not you.",Be rightly placed
+B2,differ,from,It differs --- the old one,Be unlike
+B1,escape,from,He escaped --- danger,Get away
+A,graduate,from,She graduated --- college,-
+A,recover,from,He recovered --- illness,Regain health
+B2,resign,from,She resigned --- the board,Quit a position
+B2,separate,from,They separated it --- the rest,Divide apart
+B1,suffer,from,He suffers --- allergies,Experience negatively
+B2,emerge,from,The truth emerged --- the audit,Become apparent
+A,hide,from,She hid --- the rain,-
+B2,prevent,from,They prevent us --- entering,Stop or hinder
+C1,refrain,from,Please refrain --- smoking,Avoid doing
+A,save,from,He saved us --- trouble,Rescue or keep safe
+B2,stem,from,It stems --- a rule,Originate or arise
+A,approve,of,They approve --- the plan,Officially accept or support something
+A,dream,of,He dreamed --- success,Imagine or desire something
+B1,consist,of,The team consists --- five people,Be made up of parts
+A,think,of,He thought --- his childhood.,-
+B1,accuse,of,They accused him --- theft,Blame someone for wrongdoing
+B1,die,of,He died --- old age,-
+B2,rob,of,Thieves robbed him --- cash,Steal from someone
+B2,suspect,of,They suspect her --- lying,Believe someone guilty of something
+A,meet,at,I met him --- the station.,-
+B1,translate,into,We translated it --- Spanish,-
+B1,vote,against,They voted --- the change,-
+A,arrive,at,We arrived --- the airport.,-
+B1,warn,against,We warned them --- scams,-
+A,arrive,in,They arrived --- the city in the evening.,-
+B2,distinguish,between,Can you distinguish --- fact and opinion,Recognize differences
+A,live,with,He lives --- his parents.,-
+A,disagree,about,He disagreed --- my opinion.,-
+A,discuss,with,We discussed the issue --- our friends.,-
+B2,abstain,from,He abstained --- drinking alcohol during the celebration.,Refrain voluntarily
+C1,incur,for,They incurred a penalty --- late payment.,Become liable
+C1,pronounce,upon,The priest pronounced --- the couple.,Make official statement
+A,remind,of,This reminds me --- home,Cause to recall memories
+C1,take care,of,Please take care --- the documents while I am away.,Look after or handle
+A,smell,of,The kitchen began to smell --- freshly baked bread.,-
+C1,deter,from,The heavy rain did not deter him --- going outside.,Discourage or prevent from action
+B2,opt,for,Many people opt --- healthier diets nowadays.,Choose as an option
+C1,resign,to,He decided to resign --- his position at the company.,Accept something undesirable
+B2,argue,for,They argue --- equal rights for all citizens.,Support in discussion
+C1,implicate,in,The evidence implicated him --- the robbery.,Show involvement in crime
+C1,be concerned,about,Parents are often concerned --- their children’s safety.,Worried or anxious
+A,fall in love,with,She fell in love --- her best friend.,Develop romantic feelings
+B2,allow,for,The design will allow --- more flexibility in the future.,Make provision or consider
+A,look forward,to,I look forward --- meeting you soon.,Anticipate with pleasure
+A,happen,to,What happened --- your car yesterday?,-
+A,laugh,at,They laughed --- the joke.,-
+C1,take advantage,of,She took advantage --- the opportunity.,Exploit for benefit
+A,list,for,Could you list me --- the candidates for the job?,-
+C1,abase,before,He abased himself --- the king’s presence.,Humble oneself before
+B2,devote,to,She devoted herself --- helping the poor.,Dedicate or commit
+A,ask,to,He asked --- a glass of water.,-
+A,agree,with,I agree --- your opinion.,Share the same opinion
+A,run,after,The child ran --- his mother when he saw her.,-
+A,success,in,His success --- mathematics surprised everyone.,-
+B2,confess,to,She confessed --- the crime after hours of questioning.,Admit wrongdoing
+A,talk,to,She talked --- her friend.,-
+C1,abase,by,He would not abase himself --- begging for help.,Degrade oneself by
+A,look,after,She looks --- her younger sister.,"Care for, supervise"
+A,speak,about,We spoke --- the changes.,-
+A,depend,on,It depends --- the weather.,Be influenced by
+A,work,for,She works --- a charity that helps children.,-
+A,come,from,This perfume comes --- France.,-
+A,ask,about,She asked --- the new project.,-
+A,work,in,He works --- a software company.,-
+A,remember,about,Please remember --- bring your passport.,-
+A,invite,to,She invited me --- her party.,-
+A,study,for,She went to the library to study --- her exams.,-
+A,react,to,How did they react --- the shocking news?,Respond emotionally or physically
+B1,strain,under,They strained --- constant demand,Struggle due to heavy burden
+B2,study,under,He studies --- supervision,Receive guidance from
+B2,toggle,between,Please toggle --- views,Switch between choices
+B1,select,among,We selected one --- many options,Choose from alternatives
+B1,number,among,She numbers --- the top five,Be included in a group
+A,agree,on,They agreed --- the new plan.,Reach agreement
+A,apologize,to,He apologized --- his friend.,-
+A,apologize,about,We apologized --- the misunderstanding.,-
+A,believe,that,They believe --- he is honest.,-
+A,hear,from,I heard --- her yesterday.,Receive communication
+B2,beg,for,The child begged --- a piece of candy.,-
+C1,charge,with,He was charged --- theft.,Officially accused of a crime
+A,look,like,He looks --- his father; they share the same smile.,Resemble in appearance or manner
+C1,attribute,to,She tried to attribute the success --- her mentor.,Credit or assign responsibility
+A,look,into,He is looking --- the problem.,Investigate closely
+A,wait,on,She is waiting --- her friend.,Attend or serve
+A,travel,by,We traveled --- train.,-
+A,meet,with,She met him --- her best friend.,-
+A,go,with,She went --- her friends to the concert.,-
+A,participate,in,We participated --- the competition.,-
+A,live,in,She lives --- New York.,-
+A,call,for,She called --- help.,Request or demand
+A,ask,into,He asked me to look --- the box.,Look inside
+A,deal,with,We dealt --- the problem quickly.,Handle or manage
+A,finish,with,She finished --- her homework.,-
+A,add,to,He added sugar --- the tea.,-
+A,admire,for,She admired him --- his courage.,Respect or esteem
+A,get,rid of,He managed to get --- his bad habits.,Eliminate or discard
+A,concentrate,in,You must concentrate --- your studies if you want to succeed.,Focus attention on
+B1,cooperate,with,The two companies agreed to cooperate --- each other.,Work jointly with
+B1,depend,upon,Success often depends --- hard work and persistence.,"Rely on, be contingent"
+B1,experiment,with,We experimented --- different solutions before choosing the best one.,Test through trials
+B1,lend,to,He lent his book --- me for a week.,-
+B1,agree,upon,They agreed --- the new plan after a long discussion.,Reach agreement
+A,prefer,to,I prefer tea --- coffee in the morning.,-
+A,introduce,to,He introduced me --- his colleagues at the conference.,-

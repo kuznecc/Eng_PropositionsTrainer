@@ -106,7 +106,7 @@ for,apply,"He applied --- a new passport yesterday."
       }, []);
 
       const row = data[idx] || {};
-      const [before, after] = (row['usage case']||'').split('---');
+      const [before, after] = (row['usage_case'] || row['usage case'] || '').split('---');
 
       const focusInput = () => setTimeout(()=> inputRef.current?.focus(), 0);
 
