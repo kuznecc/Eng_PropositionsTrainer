@@ -11,7 +11,7 @@
     :root{
       --bg:#0b0f17; --fg:#e6ebf3; --muted:#aab6cf; --ok:#46d38a; --bad:#ff6b6b; --accent:#7aa2ff;
     }
-    html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);} 
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);}
     #root{height:100%;display:flex;align-items:center;justify-content:center;}
     .app{width:min(920px,100%);padding:24px 20px 32px;text-align:center;}
     .header{font:700 44px/1.2 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; text-align:center; margin-top:16px;}
@@ -34,19 +34,19 @@
     .action-button:hover { background-color: rgba(170, 182, 207, 0.1); }
     .button-container { display: flex; flex-direction: column; align-items: center; }
     .key-hint { font-family: 'Roboto Mono', monospace; font-size: 12px; color: var(--muted); margin-top: 4px; }
-    
     .action-button.submit { border-color: var(--ok); color: var(--ok); }
     .action-button.submit:hover { background-color: rgba(70, 211, 138, 0.1); }
     .action-button.hint { border-color: #ffc700; color: #ffc700; }
     .action-button.hint:hover { background-color: rgba(255, 199, 0, 0.1); }
     .result{font:600 22px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin-bottom:6px;}
     .ok{color:var(--ok);} .bad{color:var(--bad);}
-    .hint-box { display: inline-block; border: 2px dotted #ffc700; border-radius: 8px; padding: 12px; margin-top: 20px; text-align: left; background-color: rgba(255, 199, 0, 0.15); }
+        .hint-box { display: block; width: -moz-fit-content; width: fit-content; margin: 20px auto 0; border: 2px dotted #ffc700; border-radius: 8px; padding: 12px; text-align: left; background-color: rgba(255, 199, 0, 0.15); }
     .hint-box h4 { margin: 0 0 8px; color: var(--accent); text-align: center; }
-    .debug-details { display: inline-block; margin-top: 20px; border: 1px solid var(--muted); border-radius: 8px; text-align: left; }
-    .debug-summary { padding: 8px 12px; cursor: pointer; outline: none; }
-    .debug-content { padding: 12px; white-space: pre-wrap; word-break: break-all; }
-    .toast-container { min-height: 65px; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+    .debug-toggle { margin-top: 20px; display: flex; justify-content: center; align-items: center; gap: 8px; color: var(--muted); }
+    .debug-toggle label { font-family: 'Roboto Mono', monospace; font-size: 12px; }
+    .debug-box { display: block; width: -moz-fit-content; width: fit-content; margin: 20px auto 0; border: 2px dotted var(--muted); border-radius: 8px; padding: 12px; text-align: left; background-color: rgba(170, 182, 207, 0.1); }
+    .debug-box h4 { margin: 0 0 8px; color: var(--muted); text-align: center; }
+    .debug-box pre { margin: 0; font-family: 'Roboto Mono', monospace; font-size: 12px; }
     /* Simple 2s fade (no initial hold). Re-applying with a new key restarts it. */
     .fade2s{ animation: fade2s 2s linear forwards; }
     @keyframes fade2s{ 0% { opacity: 1; } 100% { opacity: 0; } }
@@ -118,6 +118,7 @@ for,apply,"He applied --- a new passport yesterday."
       const inputRef = React.useRef(null);
       const [toast, setToast] = React.useState(null);
       const [showHint, setShowHint] = React.useState(false);
+      const [showDebug, setShowDebug] = React.useState(false);
 
       React.useEffect(() => {
         let alive = true;
@@ -291,14 +292,20 @@ for,apply,"He applied --- a new passport yesterday."
             </div>
           )}
 
-          <div className="spacer-2"/>
+          <div className="debug-toggle">
+            <input type="checkbox" id="show-debug" checked={showDebug} onChange={e => setShowDebug(e.target.checked)} />
+            <label htmlFor="show-debug">Debug Info</label>
+          </div>
 
-          <details className="debug-details">
-            <summary className="debug-summary">Debug Info</summary>
-            <pre className="debug-content">
-              {currentRow && Object.entries(currentRow).map(([key, value]) => `${key}: ${value}`).join('\n')}
-            </pre>
-          </details>
+          {showDebug && currentRow && (
+            <div className="debug-box">
+              <pre>
+                {Object.entries(currentRow).map(([key, value]) => `${key}: ${value}`).join('\n')}
+              </pre>
+            </div>
+          )}
+
+          <div className="spacer-2"/>
         </div>
       );
     }
