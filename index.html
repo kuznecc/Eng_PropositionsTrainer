@@ -254,7 +254,8 @@ for,apply,"He applied --- a new passport yesterday."
                   autoCorrect="off"
                   spellCheck={false}
                   value={value}
-                  onChange={(e) => setValue(e.target.value.toLowerCase())}
+                  onChange={(e) => setValue(e.target.value.replace(/[^a-zA-Z-]/g, ''))}
+                  pattern="[a-zA-Z-]*"
                   style={{ width: `${inputWidthCh}ch` }}
                   aria-label="Missing preposition"
                 />
