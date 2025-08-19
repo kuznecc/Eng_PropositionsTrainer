@@ -68,11 +68,11 @@ in,be interested,"She is interested --- medieval history."
 to,listen,"Please listen --- your teacher during the lecture."
 for,wait,"We will wait --- the next train."
 with,agree,"I agree --- you on that point."
-on,insist,"He insisted --- paying for dinner."
+on,insist,"He insisted --- paying for dinner.
 from,suffer,"Many people suffer --- allergies in spring."
 at,arrive,"They arrived --- the airport late at night."
 to,belong,"This book belongs --- my sister."
-for,apply,"He applied --- a new passport yesterday."
+for,apply,"He applied --- a new passport yesterday.
 `;
 
     const parse = (csv) => Papa.parse(csv.trim(), {header:true, skipEmptyLines:true}).data;
@@ -221,6 +221,25 @@ for,apply,"He applied --- a new passport yesterday."
         </div>
       );
 
+      const datasetStats = React.useMemo(() => {
+        if (!data || data.length === 0) {
+          return 'Dataset size: 0';
+        }
+
+        const levelCounts = data.reduce((acc, row) => {
+          const level = row.level || 'Unknown';
+          acc[level] = (acc[level] || 0) + 1;
+          return acc;
+        }, {});
+
+        const levelCountsString = Object.entries(levelCounts)
+          .sort(([levelA], [levelB]) => levelA.localeCompare(levelB))
+          .map(([level, count]) => `${level}:${count}`)
+          .join(', ');
+
+        return `Dataset size: ${data.length} [${levelCountsString}]`;
+      }, [data]);
+
       return (
         <div className="app">
           <div className="header">Preposition Trainer</div>
@@ -300,7 +319,7 @@ for,apply,"He applied --- a new passport yesterday."
           {showDebug && currentRow && (
             <div className="debug-box">
               <pre>
-                {Object.entries(currentRow).map(([key, value]) => `${key}: ${value}`).join('\n')}
+                {Object.entries(currentRow).map(([key, value]) => `${key}: ${value}`).join('\n') + '\n\n' + datasetStats}
               </pre>
             </div>
           )}
