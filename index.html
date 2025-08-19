@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0f17; --fg:#e6ebf3; --muted:#aab6cf; --ok:#46d38a; --bad:#ff6b6b; --accent:#7aa2ff;
+      --bg:#0b0f17; --fg:#e6ebf3; --muted:#aab6cf; --ok:#46d38a; --bad:#ff6b6b; --warning:#ff9800; --accent:#7aa2ff;
     }
     html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);}
     #root{height:100%;display:flex;align-items:center;justify-content:center;}
@@ -39,8 +39,8 @@
     .action-button.hint { border-color: #ffc700; color: #ffc700; }
     .action-button.hint:hover { background-color: rgba(255, 199, 0, 0.1); }
     .result{font:600 22px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin-bottom:6px;}
-    .ok{color:var(--ok);} .bad{color:var(--bad);}
-        .hint-box { display: block; width: -moz-fit-content; width: fit-content; margin: 20px auto 0; border: 2px dotted #ffc700; border-radius: 8px; padding: 12px; text-align: left; background-color: rgba(255, 199, 0, 0.15); }
+    .ok{color:var(--ok);} .bad{color:var(--bad);} .warning{color:var(--warning);}
+    .hint-box { display: block; width: -moz-fit-content; width: fit-content; margin: 20px auto 0; border: 2px dotted #ffc700; border-radius: 8px; padding: 12px; text-align: left; background-color: rgba(255, 199, 0, 0.15); }
     .hint-box h4 { margin: 0 0 8px; color: var(--accent); text-align: center; }
     .debug-toggle { margin-top: 20px; display: flex; justify-content: center; align-items: center; gap: 8px; color: var(--muted); }
     .debug-toggle label { font-family: 'Roboto Mono', monospace; font-size: 12px; }
@@ -60,8 +60,6 @@
 <body>
   <div id="root"></div>
   <script type="text/babel">
-    
-
     const parse = (csv) => Papa.parse(csv.trim(), {header:true, skipEmptyLines:true}).data;
     const answersOf = (row) => (row.preposition||'').toLowerCase().split('|').map(s=>s.trim());
 
@@ -80,8 +78,6 @@
       return parse(CSV_FALLBACK);
     }
 
-    
-
     function App() {
       const [data, setData] = React.useState([]);
       const [levels, setLevels] = React.useState([]);
@@ -89,7 +85,7 @@
       const [currentRow, setCurrentRow] = React.useState(null);
       const [value, setValue] = React.useState('');
       const inputRef = React.useRef(null);
-      const [toast, setToast] = React.useState(null);
+      const [toast, setToast] = React.useState(null); // { key, type, text }
       const [showHint, setShowHint] = React.useState(false);
       const [showDebug, setShowDebug] = React.useState(false);
 
@@ -130,13 +126,14 @@
 
       const check = React.useCallback(() => {
         if (!currentRow) return;
+        if (toast?.type === 'warning') setToast(null);
         setShowHint(false);
         const correct = answersOf(currentRow);
         const v = (value || '').trim().toLowerCase();
         const wasOk = correct.includes(v);
         const toastData = {
           key: Date.now(),
-          ok: wasOk,
+          type: wasOk ? 'ok' : 'bad',
           text: wasOk ? 'OK' : 'Wrong'
         };
         setToast(toastData);
@@ -146,7 +143,7 @@
           setValue('');
           focusInput();
         }
-      }, [currentRow, value, pickRandomRow]);
+      }, [currentRow, value, pickRandomRow, toast]);
 
       React.useEffect(() => {
         if (!toast) return;
@@ -155,13 +152,24 @@
       }, [toast]);
       
       const focusInput = () => setTimeout(()=> inputRef.current?.focus(), 0);
-      React.useEffect(()=>{
+      React.useEffect(()=> {
         setValue('');
         focusInput();
       }, [currentRow]);
 
-      const handleLevelChange = (event) => {
-        setSelectedLevel(event.target.value);
+      const handleInputChange = (e) => {
+        const newValue = e.target.value;
+        const lastChar = newValue.slice(-1);
+
+        if (/[a-zA-Z-]/.test(lastChar) || newValue === '') {
+            if (toast?.type === 'warning') {
+                setToast(null);
+            }
+        } else if (/\p{L}/u.test(lastChar)) {
+            setToast({ key: Date.now(), type: 'warning', text: `Non-English layout. [${lastChar}]` });
+        }
+        
+        setValue(newValue.replace(/[^a-zA-Z-]/g, ''));
       };
 
       const onSubmit = (e) => { e.preventDefault(); check(); };
@@ -186,7 +194,7 @@
 
       const footerContent = toast ? (
         <div key={toast.key} className="fade2s">
-          <div className={"result " + (toast.ok ? "ok" : "bad")}>{toast.text}</div>
+          <div className={`result ${toast.type}`}>{toast.text}</div>
         </div>
       ) : (
         <div style={{ visibility: 'hidden' }}>
@@ -245,7 +253,7 @@
                   autoCorrect="off"
                   spellCheck={false}
                   value={value}
-                  onChange={(e) => setValue(e.target.value.replace(/[^a-zA-Z-]/g, ''))}
+                  onChange={handleInputChange}
                   pattern="[a-zA-Z-]*"
                   style={{ width: `${inputWidthCh}ch` }}
                   aria-label="Missing preposition"
@@ -292,7 +300,7 @@
           {showDebug && currentRow && (
             <div className="debug-box">
               <pre>
-                {Object.entries(currentRow).map(([key, value]) => `${key}: ${value}`).join('\n') + '\n\n' + datasetStats}
+                {Object.entries(currentRow).map(([key, value]) => `${key}: ${value}`).join('\\n') + '\\n\\n' + datasetStats}
               </pre>
             </div>
           )}
