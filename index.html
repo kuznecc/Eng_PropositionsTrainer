@@ -88,6 +88,7 @@
       const [toast, setToast] = React.useState(null); // { key, type, text }
       const [showHint, setShowHint] = React.useState(false);
       const [showDebug, setShowDebug] = React.useState(false);
+      const [solvedCount, setSolvedCount] = React.useState(0);
 
       React.useEffect(() => {
         let alive = true;
@@ -138,6 +139,7 @@
         };
         setToast(toastData);
         if (wasOk) {
+          setSolvedCount(c => c + 1);
           pickRandomRow();
         } else {
           setValue('');
@@ -292,6 +294,10 @@
               <button className="action-button" onClick={pickRandomRow}>Skip</button>
               <span className="key-hint">&lt;esc&gt;</span>
             </div>
+          </div>
+
+          <div style={{ marginTop: '20px', fontSize: '16px', color: 'var(--muted)' }}>
+            Solved: <span style={{ color: 'var(--ok)', fontWeight: 'bold' }}>{solvedCount}</span>
           </div>
 
           {showHint && currentRow && (
