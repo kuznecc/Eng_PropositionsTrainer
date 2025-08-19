@@ -40,12 +40,13 @@
     .action-button.hint { border-color: #ffc700; color: #ffc700; }
     .action-button.hint:hover { background-color: rgba(255, 199, 0, 0.1); }
     .result{font:600 22px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin-bottom:6px;}
-    .ok{color:var(--ok);} .bad{color:var(--bad);} .answer{color:#cfd8f7; font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;}
+    .ok{color:var(--ok);} .bad{color:var(--bad);}
     .hint-box { display: inline-block; border: 2px dotted #ffc700; border-radius: 8px; padding: 12px; margin-top: 20px; text-align: left; background-color: rgba(255, 199, 0, 0.15); }
     .hint-box h4 { margin: 0 0 8px; color: var(--accent); text-align: center; }
     .debug-details { display: inline-block; margin-top: 20px; border: 1px solid var(--muted); border-radius: 8px; text-align: left; }
     .debug-summary { padding: 8px 12px; cursor: pointer; outline: none; }
     .debug-content { padding: 12px; white-space: pre-wrap; word-break: break-all; }
+    .toast-container { min-height: 65px; display: flex; align-items: center; justify-content: center; flex-direction: column; }
     /* Simple 2s fade (no initial hold). Re-applying with a new key restarts it. */
     .fade2s{ animation: fade2s 2s linear forwards; }
     @keyframes fade2s{ 0% { opacity: 1; } 100% { opacity: 0; } }
@@ -162,8 +163,7 @@ for,apply,"He applied --- a new passport yesterday."
         const toastData = {
           key: Date.now(),
           ok: wasOk,
-          text: wasOk ? 'OK' : 'Wrong',
-          answerText: wasOk ? null : `Correct answer: ${correct.map(a => `"${a}"`).join(' or ')}`
+          text: wasOk ? 'OK' : 'Wrong'
         };
         setToast(toastData);
         if (wasOk) {
@@ -211,13 +211,14 @@ for,apply,"He applied --- a new passport yesterday."
       }, [pickRandomRow]);
 
       const footerContent = toast ? (
-        <div key={toast.key} className="footer fade2s">
+        <div key={toast.key} className="fade2s">
           <div className={"result " + (toast.ok ? "ok" : "bad")}>{toast.text}</div>
-          {toast.answerText && (
-            <div className="answer">{toast.answerText}</div>
-          )}
         </div>
-      ) : null;
+      ) : (
+        <div style={{ visibility: 'hidden' }}>
+          <div className="result">&nbsp;</div>
+        </div>
+      );
 
       return (
         <div className="app">
@@ -264,6 +265,8 @@ for,apply,"He applied --- a new passport yesterday."
             <div>Loading...</div>
           )}
 
+          {footerContent}
+
           <div className="action-buttons">
             <div className="button-container">
               <button className="action-button hint" onClick={() => setShowHint(prev => !prev)}>Hint</button>
@@ -289,8 +292,6 @@ for,apply,"He applied --- a new passport yesterday."
           )}
 
           <div className="spacer-2"/>
-
-          {footerContent}
 
           <details className="debug-details">
             <summary className="debug-summary">Debug Info</summary>
