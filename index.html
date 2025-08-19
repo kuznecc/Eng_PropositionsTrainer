@@ -60,20 +60,7 @@
 <body>
   <div id="root"></div>
   <script type="text/babel">
-    // ===== Default embedded CSV (fallback) =====
-    const CSV_FALLBACK = `
-preposition,verb,usage case
-about,complain,"People often complain --- the noise from the street."
-in,be interested,"She is interested --- medieval history."
-to,listen,"Please listen --- your teacher during the lecture."
-for,wait,"We will wait --- the next train."
-with,agree,"I agree --- you on that point."
-on,insist,"He insisted --- paying for dinner.
-from,suffer,"Many people suffer --- allergies in spring."
-at,arrive,"They arrived --- the airport late at night."
-to,belong,"This book belongs --- my sister."
-for,apply,"He applied --- a new passport yesterday.
-`;
+    
 
     const parse = (csv) => Papa.parse(csv.trim(), {header:true, skipEmptyLines:true}).data;
     const answersOf = (row) => (row.preposition||'').toLowerCase().split('|').map(s=>s.trim());
@@ -93,21 +80,7 @@ for,apply,"He applied --- a new passport yesterday.
       return parse(CSV_FALLBACK);
     }
 
-    // ===== Self-tests (parsing) =====
-    (function tests(){
-      try {
-        const rows = parse(CSV_FALLBACK);
-        console.assert(Array.isArray(rows) && rows.length >= 3, 'parsed rows >= 3');
-        console.assert(rows[0]['usage case']?.includes('---'), 'usage case has placeholder');
-        const sampleCRLF = parse('a,b,c\r\n1,2,"x,y"');
-        console.assert(sampleCRLF.length === 1 && sampleCRLF[0].a==='1', 'CRLF handled');
-        const multi = parse('preposition,verb,usage case\n"to|for",apply,"Apply --- the program"');
-        console.assert(multi[0].preposition==='to|for', 'multiple answers parsed');
-        console.assert(answersOf({preposition:'to|for'}).includes('to'), 'answer matching works');
-        console.assert(!answersOf({preposition:'in'}).includes('on'), 'negative match works');
-        console.log('%cSELF-TESTS PASSED','color:#46d38a');
-      } catch(e){ console.error('SELF-TEST FAILED', e); }
-    })();
+    
 
     function App() {
       const [data, setData] = React.useState([]);
