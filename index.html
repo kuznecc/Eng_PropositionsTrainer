@@ -179,11 +179,22 @@
 
       React.useEffect(() => {
         const handleKeyDown = (event) => {
+          // Allow typing in inputs, textareas, or content-editable elements without interference.
+          const activeEl = document.activeElement;
+          const isTypingInInput = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.isContentEditable);
+
           if (event.key === 'Escape') {
             pickRandomRow();
+            return;
           }
           if (event.key === '?') {
             setShowHint(prev => !prev);
+            return;
+          }
+
+          // If a letter or hyphen is pressed and we are not already in an input, focus our main input.
+          if ((/^[a-zA-Z-]$/.test(event.key) || event.key === 'Backspace') && !isTypingInInput) {
+            inputRef.current?.focus();
           }
         };
         document.addEventListener('keydown', handleKeyDown);
