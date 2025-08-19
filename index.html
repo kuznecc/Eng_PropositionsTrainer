@@ -37,9 +37,13 @@
     
     .action-button.submit { border-color: var(--ok); color: var(--ok); }
     .action-button.submit:hover { background-color: rgba(70, 211, 138, 0.1); }
+    .action-button.hint { border-color: #ffc700; color: #ffc700; }
+    .action-button.hint:hover { background-color: rgba(255, 199, 0, 0.1); }
     .footer{font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--muted);} 
     .result{font:600 22px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin-bottom:6px;}
     .ok{color:var(--ok);} .bad{color:var(--bad);} .answer{color:#cfd8f7}
+    .hint-box { display: inline-block; border: 2px dotted #ffc700; border-radius: 8px; padding: 12px; margin-top: 20px; text-align: left; background-color: rgba(255, 199, 0, 0.15); }
+    .hint-box h4 { margin: 0 0 8px; color: var(--accent); text-align: center; }
     .debug-details { display: inline-block; margin-top: 20px; border: 1px solid var(--muted); border-radius: 8px; text-align: left; }
     .debug-summary { padding: 8px 12px; cursor: pointer; outline: none; }
     .debug-content { padding: 12px; white-space: pre-wrap; word-break: break-all; }
@@ -113,6 +117,7 @@ for,apply,"He applied --- a new passport yesterday."
       const [value, setValue] = React.useState('');
       const inputRef = React.useRef(null);
       const [toast, setToast] = React.useState(null);
+      const [showHint, setShowHint] = React.useState(false);
 
       React.useEffect(() => {
         let alive = true;
@@ -136,6 +141,7 @@ for,apply,"He applied --- a new passport yesterday."
       }, [data, selectedLevel]);
 
       const pickRandomRow = React.useCallback(() => {
+        setShowHint(false);
         if (!filteredData || filteredData.length === 0) {
           setCurrentRow(null);
           return;
@@ -150,6 +156,7 @@ for,apply,"He applied --- a new passport yesterday."
 
       const check = React.useCallback(() => {
         if (!currentRow) return;
+        setShowHint(false);
         const correct = answersOf(currentRow);
         const v = (value || '').trim().toLowerCase();
         const wasOk = correct.includes(v);
@@ -193,6 +200,9 @@ for,apply,"He applied --- a new passport yesterday."
         const handleKeyDown = (event) => {
           if (event.key === 'Escape') {
             pickRandomRow();
+          }
+          if (event.key === '?') {
+            setShowHint(prev => !prev);
           }
         };
         document.addEventListener('keydown', handleKeyDown);
@@ -258,14 +268,27 @@ for,apply,"He applied --- a new passport yesterday."
 
           <div className="action-buttons">
             <div className="button-container">
+              <button className="action-button hint" onClick={() => setShowHint(prev => !prev)}>Hint</button>
+              <span className="key-hint">&lt;?&gt;</span>
+            </div>
+            <div className="button-container">
               <button className="action-button submit" onClick={check}>Submit</button>
               <span className="key-hint">&lt;enter&gt;</span>
             </div>
             <div className="button-container">
-              <button className="action-button skip" onClick={pickRandomRow}>Skip</button>
+              <button className="action-button" onClick={pickRandomRow}>Skip</button>
               <span className="key-hint">&lt;esc&gt;</span>
             </div>
           </div>
+
+          {showHint && currentRow && (
+            <div className="hint-box">
+              <h4>Hint</h4>
+              <div><strong>Verb:</strong> {currentRow.verb}</div>
+              <div><strong>Meaning:</strong> {currentRow.meaning}</div>
+              <div><strong>Preposition:</strong> {answersOf(currentRow).join(' or ')}</div>
+            </div>
+          )}
 
           <div className="spacer-2"/>
 
