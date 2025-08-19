@@ -39,9 +39,8 @@
     .action-button.submit:hover { background-color: rgba(70, 211, 138, 0.1); }
     .action-button.hint { border-color: #ffc700; color: #ffc700; }
     .action-button.hint:hover { background-color: rgba(255, 199, 0, 0.1); }
-    .footer{font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--muted);} 
     .result{font:600 22px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin-bottom:6px;}
-    .ok{color:var(--ok);} .bad{color:var(--bad);} .answer{color:#cfd8f7}
+    .ok{color:var(--ok);} .bad{color:var(--bad);} .answer{color:#cfd8f7; font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;}
     .hint-box { display: inline-block; border: 2px dotted #ffc700; border-radius: 8px; padding: 12px; margin-top: 20px; text-align: left; background-color: rgba(255, 199, 0, 0.15); }
     .hint-box h4 { margin: 0 0 8px; color: var(--accent); text-align: center; }
     .debug-details { display: inline-block; margin-top: 20px; border: 1px solid var(--muted); border-radius: 8px; text-align: left; }
@@ -218,9 +217,7 @@ for,apply,"He applied --- a new passport yesterday."
             <div className="answer">{toast.answerText}</div>
           )}
         </div>
-      ) : (
-        <div className="footer">Type the missing preposition and press <strong>Enter</strong> to check. Press <strong>Esc</strong> to skip.</div>
-      );
+      ) : null;
 
       return (
         <div className="app">
