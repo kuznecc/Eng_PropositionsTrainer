@@ -47,6 +47,9 @@
     .debug-box { display: block; width: -moz-fit-content; width: fit-content; margin: 20px auto 0; border: 2px dotted var(--muted); border-radius: 8px; padding: 12px; text-align: left; background-color: rgba(170, 182, 207, 0.1); }
     .debug-box h4 { margin: 0 0 8px; color: var(--muted); text-align: center; }
     .debug-box pre { margin: 0; font-family: 'Roboto Mono', monospace; font-size: 12px; }
+    .tooltip-container { position: relative; display: inline-block; cursor: pointer; }
+    .tooltip-text { visibility: hidden; width: 240px; background-color: #2a3140; color: var(--fg); text-align: left; border-radius: 6px; padding: 8px; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -120px; opacity: 0; transition: opacity 0.3s; white-space: pre-wrap; }
+    .tooltip-container:hover .tooltip-text { visibility: visible; opacity: 1; }
     /* Simple 2s fade (no initial hold). Re-applying with a new key restarts it. */
     .fade2s{ animation: fade2s 2s linear forwards; }
     @keyframes fade2s{ 0% { opacity: 1; } 100% { opacity: 0; } }
@@ -89,6 +92,7 @@
       const [showHint, setShowHint] = React.useState(false);
       const [showDebug, setShowDebug] = React.useState(false);
       const [solvedCount, setSolvedCount] = React.useState(0);
+      const [preconditionTypes, setPreconditionTypes] = React.useState({});
 
       React.useEffect(() => {
         let alive = true;
@@ -103,6 +107,35 @@
           });
           setLevels(uniqueLevels);
         })();
+        return () => { alive = false; };
+      }, []);
+
+      React.useEffect(() => {
+        let alive = true;
+        async function loadPreconditionTypes() {
+          try {
+            const res = await fetch('assets/precondition_types.md');
+            if (!res.ok) return;
+            const text = await res.text();
+            
+            const types = {};
+            const sections = text.split('## ').slice(1);
+            sections.forEach(section => {
+              const lines = section.split('\n').filter(line => line.trim() !== '');
+              if (lines.length > 0) {
+                const title = lines[0].replace(':', '').trim();
+                const content = lines.slice(1).map(line => line.trim().replace(/^- /, '')).join('\n');
+                types[title] = content;
+              }
+            });
+            if (alive) {
+              setPreconditionTypes(types);
+            }
+          } catch (e) {
+            // ignore errors
+          }
+        }
+        loadPreconditionTypes();
         return () => { alive = false; };
       }, []);
 
@@ -279,6 +312,32 @@
             <div>Loading...</div>
           )}
 
+          {currentRow && (
+            <div style={{ marginTop: '12px' }}>
+              {currentRow.meaning && (
+                <div className="key-hint" style={{ fontSize: '14px', textAlign: 'center' }}>
+                  <strong>Meaning:</strong> {currentRow.meaning}
+                </div>
+              )}
+              {currentRow.type && (
+                <div className="key-hint" style={{ fontSize: '14px', textAlign: 'center', marginTop: '4px' }}>
+                  <strong>Preposition type:</strong> {currentRow.type}
+                  {preconditionTypes[currentRow.type] && (
+                    <span className="tooltip-container">
+                      &nbsp;<span dangerouslySetInnerHTML={{ __html: '&#8505;' }} />
+                      <span className="tooltip-text key-hint" style={{ fontSize: '14px', textAlign: 'left' }}>
+                        {preconditionTypes[currentRow.type]}
+                      </span>
+                    </span>
+                  )}
+                </div>
+              )}
+              <div className="key-hint" style={{ fontSize: '14px', textAlign: 'center', marginTop: '4px' }}>
+                <strong>Solved:</strong> <span style={{ color: 'var(--ok)', fontWeight: 'bold' }}>{solvedCount}</span>
+              </div>
+            </div>
+          )}
+
           {footerContent}
 
           <div className="action-buttons">
@@ -296,15 +355,10 @@
             </div>
           </div>
 
-          <div style={{ marginTop: '20px', fontSize: '16px', color: 'var(--muted)' }}>
-            Solved: <span style={{ color: 'var(--ok)', fontWeight: 'bold' }}>{solvedCount}</span>
-          </div>
-
           {showHint && currentRow && (
             <div className="hint-box">
               <h4>Hint</h4>
               <div><strong>Verb:</strong> {currentRow.verb}</div>
-              <div><strong>Meaning:</strong> {currentRow.meaning}</div>
               <div><strong>Preposition:</strong> {answersOf(currentRow).join(' or ')}</div>
             </div>
           )}
