@@ -54,6 +54,11 @@
     .fade2s{ animation: fade2s 2s linear forwards; }
     @keyframes fade2s{ 0% { opacity: 1; } 100% { opacity: 0; } }
     .sr-only{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+    /* Mode selector at very top */
+    .mode-bar { display:flex; gap:16px; justify-content:center; align-items:center; padding:8px 0 12px; border-bottom:1px solid rgba(122,162,255,0.25); }
+    .mode-button { background:transparent; border:none; color:var(--muted); font:600 14px/1 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding:6px 10px; cursor:pointer; border-radius:6px; transition:all 0.2s ease; }
+    .mode-button:hover { background:rgba(122,162,255,0.08); color:var(--accent); }
+    .mode-button.selected { color:var(--bg); background:var(--accent); }
   </style>
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
@@ -81,7 +86,7 @@
       return parse(CSV_FALLBACK);
     }
 
-    function App() {
+    function PrepositionTrainer() {
       const [data, setData] = React.useState([]);
       const [levels, setLevels] = React.useState([]);
       const [selectedLevel, setSelectedLevel] = React.useState('All Levels');
@@ -278,7 +283,7 @@
       }, [data]);
 
       return (
-        <div className="app">
+          <>
           <div className="header">Preposition Trainer</div>
           <div className="spacer-1"/>
           <div className="level-selector">
@@ -402,6 +407,35 @@
           )}
 
           <div className="spacer-2"/>
+          </>
+      );
+    }
+
+    function IrregularVerbsPlaceholder(){
+      return (
+        <>
+          <div className="header">Irregular Verbs</div>
+          <div className="spacer-1"/>
+          <div style={{textAlign:'center', color:'var(--muted)'}}>
+            Work in progress. The trainer for irregular verbs will appear here.
+          </div>
+          <div className="spacer-2"/>
+        </>
+      );
+    }
+
+    function App(){
+      const [mode, setMode] = React.useState('Prepositions');
+      return (
+        <div className="app">
+          <div className="mode-bar">
+            {['Prepositions','Irregular verbs'].map(m => (
+              <button key={m} className={`mode-button ${mode === m ? 'selected' : ''}`} onClick={() => setMode(m)}>
+                {m}
+              </button>
+            ))}
+          </div>
+          {mode === 'Prepositions' ? <PrepositionTrainer/> : <IrregularVerbsPlaceholder/>}
         </div>
       );
     }
