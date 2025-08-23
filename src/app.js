@@ -1,5 +1,6 @@
 import { prepositionsMode } from './modes/prepositions/index.js';
 import { irregularVerbsMode } from './modes/irregular_verbs/index.js';
+import { DEFAULT_MODE_ID } from './utils/constants.js';
 import { Title } from './components/Title.js';
 import { LevelFilter } from './components/LevelFilter.js';
 import { QuizForm } from './components/QuizForm.js';
@@ -21,6 +22,7 @@ const MODES = {
   prepositions: prepositionsMode,
   irregular_verbs: irregularVerbsMode,
 };
+const STORAGE_KEY = 'vk_app_state_v1';
 
 function usePreconditionTypes() {
   const [types, setTypes] = React.useState({});
@@ -441,9 +443,28 @@ function ModeView({ mode, persisted, setPersisted }) {
 }
 
 function App() {
-  const [modeId, setModeId] = React.useState('prepositions');
+  const [modeId, setModeId] = React.useState(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return DEFAULT_MODE_ID;
+      const parsed = JSON.parse(raw);
+      const storedMode = typeof parsed?.modeId === 'string' ? parsed.modeId : DEFAULT_MODE_ID;
+      return MODES[storedMode] ? storedMode : DEFAULT_MODE_ID;
+    } catch {
+      return DEFAULT_MODE_ID;
+    }
+  });
   const mode = MODES[modeId];
-  const [perMode, setPerMode] = React.useState({});
+  const [perMode, setPerMode] = React.useState(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return {};
+      const parsed = JSON.parse(raw);
+      return (parsed && typeof parsed.perMode === 'object' && parsed.perMode) || {};
+    } catch {
+      return {};
+    }
+  });
   const defaultState = { selectedLevel: 'All Levels', showDebug: false, solvedCount: 0, prevAnswerParts: null };
   const persisted = perMode[modeId] || defaultState;
   const setPersisted = (update) => {
@@ -453,6 +474,14 @@ function App() {
       return { ...prev, [modeId]: { ...current, ...patch } };
     });
   };
+
+  // Persist mode and per-mode state to localStorage
+  React.useEffect(() => {
+    try {
+      const payload = JSON.stringify({ modeId, perMode });
+      localStorage.setItem(STORAGE_KEY, payload);
+    } catch {}
+  }, [modeId, perMode]);
 
   const modeButtons = ['prepositions','irregular_verbs'].map(m => React.createElement('button', {
     key: m,
