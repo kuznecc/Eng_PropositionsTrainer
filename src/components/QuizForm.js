@@ -1,6 +1,6 @@
 import { AnswerInput } from './AnswerInput.js';
 
-export function QuizForm({ before, after, value, onChange, onSubmit, inputRef }) {
+export function QuizForm({ before, after, value, onChange, onSubmit, inputRef, ariaLabel }) {
   const React = globalThis.React;
   return React.createElement('form', {
     className: 'row',
@@ -14,10 +14,10 @@ export function QuizForm({ before, after, value, onChange, onSubmit, inputRef })
         value,
         onChange,
         widthCh: value.length,
+        ariaLabel,
       })
     ),
     React.createElement('span', { className: 'after' }, '\u00A0', (after || '').trim()),
     React.createElement('button', { type: 'submit', className: 'sr-only' }, 'Check')
   );
 }
-

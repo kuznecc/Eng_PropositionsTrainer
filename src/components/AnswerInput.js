@@ -1,4 +1,4 @@
-export function AnswerInput({ value, onChange, inputRef, widthCh = 1 }) {
+export function AnswerInput({ value, onChange, inputRef, widthCh = 1, ariaLabel = 'Missing preposition', id, readOnly = false, disabled = false, onKeyDown, onFocus }) {
   const React = globalThis.React;
   return React.createElement('input', {
     ref: inputRef,
@@ -9,9 +9,13 @@ export function AnswerInput({ value, onChange, inputRef, widthCh = 1 }) {
     spellCheck: false,
     value,
     onChange,
+    onKeyDown,
+    onFocus,
     pattern: '[a-zA-Z-]*',
     style: { width: `${Math.max(1, widthCh)}ch` },
-    'aria-label': 'Missing preposition',
+    'aria-label': ariaLabel,
+    id,
+    readOnly,
+    disabled,
   });
 }
-

@@ -46,6 +46,16 @@ html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);}
 .sr-only{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
 /* Mode selector at very top */
 .mode-bar { display:flex; gap:16px; justify-content:center; align-items:center; padding:8px 0 12px; border-bottom:1px solid rgba(122,162,255,0.25); }
-.mode-button { background:transparent; border:none; color:var(--muted); font:600 14px/1 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding:6px 10px; cursor:pointer; border-radius:6px; transition:all 0.2s ease; }
+.mode-button { background:transparent; border:none; color:var(--muted); font:600 12px/1 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding:1px 22px; cursor:pointer; border-radius:6px; transition:all 0.2s ease; }
 .mode-button:hover { background:rgba(122,162,255,0.08); color:var(--accent); }
 .mode-button.selected { color:var(--bg); background:var(--accent); }
+/* Exercise mode selector (irregular verbs) */
+.exercise-selector { display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin: 8px 0 16px; }
+.exercise-button { background-color: transparent; border: 2px solid var(--warning); color: var(--warning); padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-family: 'Roboto Mono', monospace; font-size: 14px; font-weight: 500; }
+.exercise-button:hover { background-color: rgba(255, 152, 0, 0.1); }
+.exercise-button.selected { background-color: var(--warning); color: var(--bg); font-weight: 700; }
+/* Verb forms row */
+.forms-row { display:flex; justify-content:center; align-items:flex-end; gap:16px; margin-top:12px; flex-wrap:wrap; }
+.form-block { display:flex; flex-direction:column; align-items:center; }
+.form-label { font-family: 'Roboto Mono', monospace; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.inputWrap--small { padding: 4px 6px; border-radius: 6px; }
