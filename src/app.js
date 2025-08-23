@@ -54,11 +54,11 @@ function ModeView({ mode, persisted, setPersisted }) {
   const { rows, levels, loading } = useDataset(mode);
   const [selectedLevel, setSelectedLevel] = React.useState(persisted?.selectedLevel || 'All Levels');
   const [selectedForms, setSelectedForms] = React.useState(
-    Array.isArray(persisted?.selectedForms) && persisted.selectedForms.length ? persisted.selectedForms : ['past_simple']
+    Array.isArray(persisted?.selectedForms) && persisted.selectedForms.length ? persisted.selectedForms : ['past_simple','past_participle']
   );
-  const [formsValue, setFormsValue] = React.useState({ base: '', past_simple: '', past_participle: '' });
-  const [activeForm, setActiveForm] = React.useState('base');
-  const inputRefs = React.useRef({ base: null, past_simple: null, past_participle: null });
+  const [formsValue, setFormsValue] = React.useState({ base: [''], past_simple: [''], past_participle: [''] });
+  const [activePos, setActivePos] = React.useState({ key: 'base', idx: 0 });
+  const inputRefs = React.useRef({ base: [], past_simple: [], past_participle: [] });
   const filtered = React.useMemo(() => {
     if (selectedLevel === 'All Levels') return rows;
     return rows.filter(r => (mode.levels(r) || '') === selectedLevel);
@@ -85,19 +85,27 @@ function ModeView({ mode, persisted, setPersisted }) {
   React.useEffect(() => {
     if (mode.id !== 'irregular_verbs' || !item) return;
     const order = ['base','past_simple','past_participle'];
+    const partsFor = (k) => k === 'base'
+      ? [item.base || '']
+      : (String(item[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean).length
+          ? String(item[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean)
+          : [item[k] || '']
+        );
     const nextValues = {};
     for (const k of order) {
+      const count = partsFor(k).length;
       if (selectedForms.includes(k)) {
-        nextValues[k] = '';
+        nextValues[k] = Array(count).fill('');
       } else {
-        nextValues[k] = k === 'base' ? (item.base || '') : (item[k] || '');
+        nextValues[k] = partsFor(k);
       }
     }
     setFormsValue(nextValues);
-    const firstEditable = order.find(k => selectedForms.includes(k));
-    setActiveForm(firstEditable || 'base');
+    const firstEditableKey = order.find(k => selectedForms.includes(k));
+    const firstEditableIdx = 0;
+    setActivePos({ key: firstEditableKey || 'base', idx: firstEditableKey ? firstEditableIdx : 0 });
     setTimeout(() => {
-      const el = inputRefs.current[firstEditable];
+      const el = inputRefs.current[firstEditableKey]?.[firstEditableIdx];
       if (el) el.focus();
     }, 0);
   }, [mode, item, selectedForms]);
@@ -111,35 +119,48 @@ function ModeView({ mode, persisted, setPersisted }) {
           showToast('warning', 'Select at least one mode');
           return prev;
         }
-        // Deselect: set field to correct answer and move focus if needed
-        setFormsValue(v => ({
-          ...v,
-          [key]: key === 'base' ? (item?.base || '') : (item?.[key] || ''),
-        }));
-        if (activeForm === key) {
+        // Deselect: set field to correct answers and move focus if needed
+        const partsFor = (k) => k === 'base'
+          ? [item?.base || '']
+          : (String(item?.[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean).length
+              ? String(item?.[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean)
+              : [item?.[k] || '']
+            );
+        setFormsValue(v => ({ ...v, [key]: partsFor(key) }));
+        if (activePos.key === key) {
           const order = ['base','past_simple','past_participle'];
           const remaining = prev.filter(k => k !== key);
-          const editable = order.filter(k => remaining.includes(k));
-          const nextKey = editable.find(k => k !== key) || editable[0];
-          if (nextKey) {
-            setActiveForm(nextKey);
-            setTimeout(() => inputRefs.current[nextKey]?.focus(), 0);
+          const editablePairs = order.flatMap(k => remaining.includes(k)
+            ? (formsValue[k] || []).map((_, idx) => ({ key: k, idx }))
+            : []
+          );
+          const nextPair = editablePairs[0];
+          if (nextPair) {
+            setActivePos(nextPair);
+            setTimeout(() => inputRefs.current[nextPair.key]?.[nextPair.idx]?.focus(), 0);
           }
         }
         return prev.filter(k => k !== key);
       } else {
         // Select: blank field and focus if no active form
-        setFormsValue(v => ({ ...v, [key]: '' }));
+        const partsFor = (k) => k === 'base'
+          ? [item?.base || '']
+          : (String(item?.[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean).length
+              ? String(item?.[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean)
+              : [item?.[k] || '']
+            );
+        const count = partsFor(key).length;
+        setFormsValue(v => ({ ...v, [key]: Array(count).fill('') }));
         const next = [...prev, key];
         const order = ['base','past_simple','past_participle'];
         if (!order.some(k => prev.includes(k))) {
-          setActiveForm(key);
-          setTimeout(() => inputRefs.current[key]?.focus(), 0);
+          setActivePos({ key, idx: 0 });
+          setTimeout(() => inputRefs.current[key]?.[0]?.focus(), 0);
         }
         return next;
       }
     });
-  }, [item, activeForm]);
+  }, [item, activePos, formsValue]);
 
   const onSubmit = () => {
     if (!item) return;
@@ -153,14 +174,20 @@ function ModeView({ mode, persisted, setPersisted }) {
       showToast('ok', 'OK');
       const prompt = mode.buildPrompt(item);
       if (mode.id === 'irregular_verbs') {
-        const capTokens = (s) => String(s || '').split('|').map(t => t ? t.charAt(0).toUpperCase() + t.slice(1) : t).join('|');
-        const baseVal = selectedForms.includes('base') ? (formsValue.base || '') : (item.base || '');
-        const psVal = selectedForms.includes('past_simple') ? (formsValue.past_simple || '') : (item.past_simple || '');
-        const ppVal = selectedForms.includes('past_participle') ? (formsValue.past_participle || '') : (item.past_participle || '');
+        const partsFor = (k) => k === 'base'
+          ? [item.base || '']
+          : (String(item[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean).length
+              ? String(item[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean)
+              : [item[k] || '']
+            );
+        const capArr = (arr) => (arr || []).map(t => t ? t.charAt(0).toUpperCase() + t.slice(1) : t).join('|');
+        const baseArr = selectedForms.includes('base') ? (formsValue.base || []) : partsFor('base');
+        const psArr = selectedForms.includes('past_simple') ? (formsValue.past_simple || []) : partsFor('past_simple');
+        const ppArr = selectedForms.includes('past_participle') ? (formsValue.past_participle || []) : partsFor('past_participle');
         const prevIrregularForms = {
-          base: capTokens(baseVal),
-          past_simple: capTokens(psVal),
-          past_participle: capTokens(ppVal),
+          base: capArr(baseArr),
+          past_simple: capArr(psArr),
+          past_participle: capArr(ppArr),
         };
         setPersisted(state => ({ solvedCount: (state.solvedCount || 0) + 1, prevIrregularForms }));
       } else {
@@ -172,28 +199,38 @@ function ModeView({ mode, persisted, setPersisted }) {
       showToast('bad', 'Wrong');
       if (mode.id === 'irregular_verbs') {
         // Clear only wrongly typed fields; focus the leftmost wrong one
-        const wrongKeys = Array.isArray(evalRes.wrongKeys) ? evalRes.wrongKeys : [];
-        if (wrongKeys.length > 0) {
+        const wrongPositions = Array.isArray(evalRes.wrongPositions) ? evalRes.wrongPositions : [];
+        if (wrongPositions.length > 0) {
           setFormsValue(v => {
             const patch = { ...v };
-            wrongKeys.forEach(k => { if (selectedForms.includes(k)) patch[k] = ''; });
+            wrongPositions.forEach(pos => {
+              if (selectedForms.includes(pos.key)) {
+                const arr = Array.isArray(patch[pos.key]) ? patch[pos.key].slice() : [];
+                arr[pos.idx] = '';
+                patch[pos.key] = arr;
+              }
+            });
             return patch;
           });
           const order = ['base','past_simple','past_participle'];
-          const focusKey = order.find(k => wrongKeys.includes(k)) || order.find(k => selectedForms.includes(k));
-          if (focusKey) {
-            setActiveForm(focusKey);
-            setTimeout(() => inputRefs.current[focusKey]?.focus(), 0);
+          const leftmostWrong = order.flatMap(k => (formsValue[k] || []).map((_, idx) => ({ key: k, idx })))
+            .find(p => wrongPositions.some(w => w.key === p.key && w.idx === p.idx));
+          const target = leftmostWrong || order.flatMap(k => selectedForms.includes(k) ? (formsValue[k] || []).map((_, idx) => ({ key: k, idx })) : [])[0];
+          if (target) {
+            setActivePos(target);
+            setTimeout(() => inputRefs.current[target.key]?.[target.idx]?.focus(), 0);
           }
         } else {
           // Fallback: clear all selected and focus first editable
           setFormsValue(v => {
             const patch = { ...v };
-            selectedForms.forEach(k => { patch[k] = ''; });
+            selectedForms.forEach(k => { patch[k] = (v[k] || []).map(() => ''); });
             return patch;
           });
-          const firstEditable = ['base','past_simple','past_participle'].find(k => selectedForms.includes(k));
-          setTimeout(() => inputRefs.current[firstEditable]?.focus(), 0);
+          const firstEditable = ['base','past_simple','past_participle']
+            .flatMap(k => selectedForms.includes(k) ? (formsValue[k] || []).map((_, idx) => ({ key: k, idx })) : [])
+            [0];
+          setTimeout(() => firstEditable && inputRefs.current[firstEditable.key]?.[firstEditable.idx]?.focus(), 0);
         }
       } else {
         setValue('');
@@ -227,13 +264,15 @@ function ModeView({ mode, persisted, setPersisted }) {
       }
       // Irregular verbs keyboard handling
       const order = ['base','past_simple','past_participle'];
-      const editable = order.filter(k => selectedForms.includes(k));
-      const currIndex = editable.indexOf(activeForm);
-      const firstEditable = editable[0];
+      const editablePairs = order.flatMap(k => selectedForms.includes(k)
+        ? (formsValue[k] || []).map((_, idx) => ({ key: k, idx }))
+        : []);
+      const currIndex = editablePairs.findIndex(p => p.key === activePos.key && p.idx === activePos.idx);
+      const firstEditable = editablePairs[0];
 
-      const focusForm = (key) => {
-        setActiveForm(key);
-        const el = inputRefs.current[key];
+      const focusPos = (pos) => {
+        setActivePos(pos);
+        const el = inputRefs.current[pos.key]?.[pos.idx];
         if (el) el.focus();
       };
 
@@ -245,33 +284,38 @@ function ModeView({ mode, persisted, setPersisted }) {
 
       if (event.key === ' ') {
         // Space: move to next editable
-        if (editable.length > 0 && currIndex >= 0 && currIndex < editable.length - 1) {
+        if (editablePairs.length > 0 && currIndex >= 0 && currIndex < editablePairs.length - 1) {
           event.preventDefault();
-          focusForm(editable[currIndex + 1]);
+          focusPos(editablePairs[currIndex + 1]);
         }
         return;
       }
       if (event.key === 'Backspace') {
         // Backspace: if active empty, move prev; otherwise let default
-        const currVal = formsValue[activeForm] || '';
-        if (currVal.length === 0 && editable.length > 0 && currIndex > 0) {
+        const currArr = formsValue[activePos.key] || [];
+        const currVal = currArr[activePos.idx] || '';
+        if (currVal.length === 0 && editablePairs.length > 0 && currIndex > 0) {
           event.preventDefault();
-          focusForm(editable[currIndex - 1]);
+          focusPos(editablePairs[currIndex - 1]);
         }
         return;
       }
       if (/^[a-zA-Z-]$/.test(event.key) && !isTyping) {
-        const target = editable.includes(activeForm) ? activeForm : firstEditable;
+        const target = editablePairs.find(p => p.key === activePos.key && p.idx === activePos.idx) || firstEditable;
         if (target) {
           const ch = event.key;
-          setFormsValue(v => ({ ...v, [target]: (v[target] || '') + ch }));
-          focusForm(target);
+          setFormsValue(v => {
+            const arr = Array.isArray(v[target.key]) ? v[target.key].slice() : [];
+            arr[target.idx] = (arr[target.idx] || '') + ch;
+            return { ...v, [target.key]: arr };
+          });
+          focusPos(target);
         }
       }
     };
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [next, mode, selectedForms, activeForm, formsValue]);
+  }, [next, mode, selectedForms, activePos, formsValue]);
 
   const prompt = item ? mode.buildPrompt(item) : { before: '', after: '' };
   const datasetStats = React.useMemo(() => {
@@ -302,30 +346,30 @@ function ModeView({ mode, persisted, setPersisted }) {
                 selectedForms,
                 values: formsValue,
                 setValues: setFormsValue,
-                activeForm,
-                setActiveForm,
+                activePos,
+                setActivePos,
                 inputRefs,
                 onToggleSelectedForm: toggleSelectedForm,
                 onMoveNext: () => {
                   const order = ['base','past_simple','past_participle'];
-                  const editable = order.filter(k => selectedForms.includes(k));
-                  const idx = editable.indexOf(activeForm);
-                  if (idx >= 0 && idx < editable.length - 1) {
-                    const nextKey = editable[idx + 1];
-                    const el = inputRefs.current[nextKey];
+                  const editablePairs = order.flatMap(k => selectedForms.includes(k) ? (formsValue[k] || []).map((_, idx) => ({ key: k, idx })) : []);
+                  const idx = editablePairs.findIndex(p => p.key === activePos.key && p.idx === activePos.idx);
+                  if (idx >= 0 && idx < editablePairs.length - 1) {
+                    const nextPos = editablePairs[idx + 1];
+                    const el = inputRefs.current[nextPos.key]?.[nextPos.idx];
                     if (el) el.focus();
-                    setActiveForm(nextKey);
+                    setActivePos(nextPos);
                   }
                 },
                 onMovePrev: () => {
                   const order = ['base','past_simple','past_participle'];
-                  const editable = order.filter(k => selectedForms.includes(k));
-                  const idx = editable.indexOf(activeForm);
+                  const editablePairs = order.flatMap(k => selectedForms.includes(k) ? (formsValue[k] || []).map((_, idx) => ({ key: k, idx })) : []);
+                  const idx = editablePairs.findIndex(p => p.key === activePos.key && p.idx === activePos.idx);
                   if (idx > 0) {
-                    const prevKey = editable[idx - 1];
-                    const el = inputRefs.current[prevKey];
+                    const prevPos = editablePairs[idx - 1];
+                    const el = inputRefs.current[prevPos.key]?.[prevPos.idx];
                     if (el) el.focus();
-                    setActiveForm(prevKey);
+                    setActivePos(prevPos);
                   }
                 },
                 onGlobalType: () => {}

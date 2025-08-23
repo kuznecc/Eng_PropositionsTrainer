@@ -46,13 +46,34 @@ export const irregularVerbsMode = {
 
     // Multi-field evaluation: inputOrValues is an object of { key: value }
     if (inputOrValues && typeof inputOrValues === 'object' && !Array.isArray(inputOrValues)) {
-      const wrongKeys = [];
+      const wrongPositions = [];
       for (const k of selected) {
-        const expected = k === 'base' ? [sanitizeAnswer(item.base)] : splitAnswers(item[k]);
-        const user = sanitizeAnswer(inputOrValues[k]);
-        if (!expected.includes(user)) wrongKeys.push(k);
+        const expectedRaw = k === 'base' ? [item.base] : splitAnswers(item[k]);
+        const expected = expectedRaw.map(sanitizeAnswer);
+        const userRaw = inputOrValues[k];
+        const userArr = Array.isArray(userRaw) ? userRaw : [userRaw];
+        // Build expected counts to allow order-agnostic matching
+        const counts = new Map();
+        expected.forEach(t => counts.set(t, (counts.get(t) || 0) + 1));
+        userArr.forEach((u, idx) => {
+          const token = sanitizeAnswer(u);
+          const have = counts.get(token) || 0;
+          if (have > 0) {
+            counts.set(token, have - 1);
+          } else {
+            wrongPositions.push({ key: k, idx });
+          }
+        });
+        // Any remaining expected tokens not matched imply wrong (likely blanks). Mark remaining unmatched positions as wrong
+        // Mark blanks explicitly where possible
+        userArr.forEach((u, idx) => {
+          const token = sanitizeAnswer(u);
+          if (!token) {
+            wrongPositions.push({ key: k, idx });
+          }
+        });
       }
-      return { correct: wrongKeys.length === 0, wrongKeys };
+      return { correct: wrongPositions.length === 0, wrongPositions };
     }
 
     // Back-compat: single-field (shouldn't be used for this mode now)
