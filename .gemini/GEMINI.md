@@ -6,13 +6,13 @@ Use this as the single source of truth when generating or editing code for this 
 Train English **verb + preposition** collocations in a browser.
 
 ## 2) Tech Stack & Structure
-- **Single-file app:** `index.html` only (HTML + inline JS/CSS).
-- **React 18 (UMD)** and **PapaParse** via **CDN**. No bundlers.
-- **No other network calls** besides an optional `dataset.csv` fetch.
+- **Modular app:** `index.html` + ES modules under `src/` and CSS in `styles/`.
+- **React 18 (UMD)**, **ReactDOM (UMD)**, and **PapaParse** via **CDN**. No bundlers.
+- **No other network calls** besides an optional `assets/dataset/*.csv` fetch.
 - Key files:
-    - `index.html` — all UI + logic.
-    - `dataset.csv` — optional external data in the same folder.
-    - `.gitignore` — keep IDE files and `pgdata` ignored.
+    - `index.html` — entry HTML, loads CDNs, `styles/app.css`, and `src/app.js` (module).
+    - `assets/dataset/dataset.csv` — prepositions dataset; `assets/dataset/dataset_irregular_verbs.csv` — future mode.
+    - `assets/precondition_types.md` — reference text for preposition type tooltips.
 
 ## 3) Data Model (CSV)
 Each row represents one training item.
@@ -24,8 +24,8 @@ Each row represents one training item.
 - On CSV issues: **skip invalid rows**, continue with valid ones, and surface a **non-blocking warning**.
 
 ## 4) Dataset Loading
-- Default: use an **embedded fallback dataset** in the page (small list).
-- If `dataset.csv` exists in the same directory:
+- Default: use a small **embedded fallback dataset** in code (see `src/modes/prepositions/fallback.js`).
+- If `assets/dataset/dataset.csv` exists:
     - Fetch with `{ cache: 'no-store' }`.
     - Parse with PapaParse (header row expected).
     - If parsing succeeds and rows ≥ 1, **override** the fallback.
@@ -45,8 +45,8 @@ Each row represents one training item.
 - **Toasts** auto-hide (~2s), never block input or navigation.
 
 ## 7) Randomization & Repetition
-- Choose the next prompt **uniformly at random** from the dataset.
-- Avoid showing the **same item twice in a row** when advancing after a correct answer.
+- Choose the next prompt **uniformly at random** from the filtered dataset.
+- Avoid showing the **same item twice in a row** when advancing after a correct answer (see `src/hooks/useQueue.js`).
 - Wrong answers **force a retry** on the same item.
 
 ## 8) Validation & Normalization

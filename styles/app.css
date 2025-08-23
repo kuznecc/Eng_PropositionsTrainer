@@ -1,0 +1,51 @@
+:root{
+  --bg:#0b0f17; --fg:#e6ebf3; --muted:#aab6cf; --ok:#46d38a; --bad:#ff6b6b; --warning:#ff9800; --accent:#7aa2ff;
+}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);} 
+#root{height:100%;display:flex;align-items:center;justify-content:center;}
+.app{width:min(920px,100%);padding:24px 20px 32px;text-align:center;}
+.header{font:700 44px/1.2 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; text-align:center; margin-top:16px;}
+.spacer-1{height:40px;}
+.spacer-2{height:60px;}
+.row{white-space:normal; scrollbar-width:thin;}
+.before,.after{font:500 28px/1.4 'Roboto Mono', monospace; display:inline;}
+.inputWrap{display:inline-flex; align-items:center; border:2px solid var(--accent); border-radius:10px; padding:6px 8px; margin:0 6px;}
+.input{font:600 20px/1 'Roboto Mono', monospace; color:var(--fg); background:transparent; border:none; outline:none; width:1ch; min-width:1ch;}
+.level{font:16px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--muted); margin-bottom: 20px;}
+.level-selector { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+.level-button { background-color: transparent; border: 2px solid var(--accent); color: var(--accent); padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-size: 16px; font-weight: 500; }
+.level-button.selected { background-color: var(--accent); color: var(--bg); font-weight: 700; }
+.level-button:hover { background-color: rgba(122, 162, 255, 0.1); }
+.level-button.selected:hover { background-color: var(--accent); }
+.level-container { display: flex; flex-direction: column; align-items: center; }
+.level-indicator { font-weight: bold; color: var(--accent); margin-top: 2px; }
+.action-buttons { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+.action-button { background-color: transparent; border: 2px solid var(--muted); color: var(--muted); padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-size: 16px; font-weight: 500; }
+.action-button:hover { background-color: rgba(170, 182, 207, 0.1); }
+.button-container { display: flex; flex-direction: column; align-items: center; }
+.key-hint { font-family: 'Roboto Mono', monospace; font-size: 12px; color: var(--muted); margin-top: 4px; }
+.action-button.submit { border-color: var(--ok); color: var(--ok); }
+.action-button.submit:hover { background-color: rgba(70, 211, 138, 0.1); }
+.action-button.hint { border-color: #ffc700; color: #ffc700; }
+.action-button.hint:hover { background-color: rgba(255, 199, 0, 0.1); }
+.result{font:600 22px/1.4 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin-bottom:6px;}
+.ok{color:var(--ok);} .bad{color:var(--bad);} .warning{color:var(--warning);} 
+.hint-box { display: block; width: -moz-fit-content; width: fit-content; margin: 20px auto 0; border: 2px dotted #ffc700; border-radius: 8px; padding: 12px; text-align: left; background-color: rgba(255, 199, 0, 0.15); }
+.hint-box h4 { margin: 0 0 8px; color: var(--accent); text-align: center; }
+.debug-toggle { margin-top: 20px; display: flex; justify-content: center; align-items: center; gap: 8px; color: var(--muted); }
+.debug-toggle label { font-family: 'Roboto Mono', monospace; font-size: 12px; }
+.debug-box { display: block; width: -moz-fit-content; width: fit-content; margin: 20px auto 0; border: 2px dotted var(--muted); border-radius: 8px; padding: 12px; text-align: left; background-color: rgba(170, 182, 207, 0.1); }
+.debug-box h4 { margin: 0 0 8px; color: var(--muted); text-align: center; }
+.debug-box pre { margin: 0; font-family: 'Roboto Mono', monospace; font-size: 12px; }
+.tooltip-container { position: relative; display: inline-block; cursor: pointer; }
+.tooltip-text { visibility: hidden; width: 240px; background-color: #2a3140; color: var(--fg); text-align: left; border-radius: 6px; padding: 8px; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -120px; opacity: 0; transition: opacity 0.3s; white-space: pre-wrap; }
+.tooltip-container:hover .tooltip-text { visibility: visible; opacity: 1; }
+/* Simple 2s fade (no initial hold). Re-applying with a new key restarts it. */
+.fade2s{ animation: fade2s 2s linear forwards; }
+@keyframes fade2s{ 0% { opacity: 1; } 100% { opacity: 0; } }
+.sr-only{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+/* Mode selector at very top */
+.mode-bar { display:flex; gap:16px; justify-content:center; align-items:center; padding:8px 0 12px; border-bottom:1px solid rgba(122,162,255,0.25); }
+.mode-button { background:transparent; border:none; color:var(--muted); font:600 14px/1 Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding:6px 10px; cursor:pointer; border-radius:6px; transition:all 0.2s ease; }
+.mode-button:hover { background:rgba(122,162,255,0.08); color:var(--accent); }
+.mode-button.selected { color:var(--bg); background:var(--accent); }
