@@ -93,6 +93,8 @@
       const [showDebug, setShowDebug] = React.useState(false);
       const [solvedCount, setSolvedCount] = React.useState(0);
       const [preconditionTypes, setPreconditionTypes] = React.useState({});
+      // Holds the last correctly submitted sentence parts for display
+      const [prevAnswerParts, setPrevAnswerParts] = React.useState(null); // { before, preposition, after }
 
       React.useEffect(() => {
         let alive = true;
@@ -173,6 +175,14 @@
         setToast(toastData);
         if (wasOk) {
           setSolvedCount(c => c + 1);
+          // Update previously submitted correct answer line
+          const usage = currentRow?.['usage_case'] || currentRow?.['usage case'] || '';
+          const [pb, pa] = usage.split('---');
+          setPrevAnswerParts({
+            before: (pb || '').trim(),
+            preposition: (value || '').trim(),
+            after: (pa || '').trim(),
+          });
           pickRandomRow();
         } else {
           setValue('');
@@ -362,6 +372,21 @@
               <div><strong>Preposition:</strong> {answersOf(currentRow).join(' or ')}</div>
             </div>
           )}
+
+          <div className="key-hint" style={{ fontSize: '14px', textAlign: 'center', marginTop: '12px' }}>
+            <strong>Last:</strong>{' '}
+            {prevAnswerParts ? (
+              <>
+                {(prevAnswerParts.before || '')}
+                {prevAnswerParts.before ? ' ' : ''}
+                <strong>{prevAnswerParts.preposition}</strong>
+                {prevAnswerParts.after ? ' ' : ''}
+                {(prevAnswerParts.after || '')}
+              </>
+            ) : (
+              '---'
+            )}
+          </div>
 
           <div className="debug-toggle">
             <input type="checkbox" id="show-debug" checked={showDebug} onChange={e => setShowDebug(e.target.checked)} />
