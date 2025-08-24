@@ -1,16 +1,159 @@
-level,base,past_simple,past_participle,meaning_en
-A1,be,was/were,been,exist or have identity
-A1,have,had,had,possess or hold
-A1,do,did,done,perform or carry out
-A1,say,said,said,speak or express words
-A1,go,went,gone,move or travel somewhere
-A1,get,got,gotten,receive or obtain something
+level,base,past_simple,past_participle,meaning
+C1,arise,arose,arisen,to begin or come into existence
+B2,awake,awoke,awoken,to stop sleeping
+A1,be,was|were,been,to exist or live
+C1,bear,bore,borne,to carry or endure
+B1,beat,beat,beaten,to strike repeatedly
+A2,become,became,become,to grow into or turn into
+A1,bigin,began,begun,to start doing something
+C1,befall,befell,befallen,to happen unexpectedly
+B1,bend,bent,bent,to curve or flex
+B1,bet,bet,bet,to risk money on an outcome
+C1,bid,bid,bid,to offer a price at auction
+C1,bind,bound,bound,to tie or secure tightly
+B2,bite,bit,bitten,to cut with teeth
+B2,bleed,bled,bled,to lose blood
+A2,blow,blew,blown,to move air forcefully
+A2,break,broke,broken,to damage into pieces
+C1,breed,bred,bred,to produce offspring
+A1,bring,brought,brought,to carry something to someone
+B2,broadcast,broadcast,broadcast,to transmit to the public
+A1,build,built,built,to construct by putting parts together
+A2,burn,burned,burned,to consume by fire
+B2,burst,burst,burst,to explode suddenly
+A1,buy,bought,bought,to obtain by paying money
+B2,cast,cast,cast,to throw forcefully
+A2,catch,caught,caught,to seize and hold
+A2,choose,chose,chosen,to pick from options
+C1,cling,clung,clung,to hold tightly
+A1,come,came,come,to move toward a place
+A1,cost,cost,cost,to require payment
+C1,creep,crept,crept,to move slowly and quietly
+A1,cut,cut,cut,to divide with a sharp tool
+B1,deal,dealt,dealt,to distribute or manage
+B1,dig,dug,dug,to break ground with a tool
+A1,do,did,done,to perform an action
+A2,draw,drew,drawn,to produce lines on a surface
+A2,dream,dreamed,dreamed,to experience visions in sleep
+A1,drink,drank,drunk,to swallow liquid
+A1,drive,drove,driven,to operate a vehicle
+C1,dwell,dwelled,dwelled,to live in a place
+A1,eat,ate,eaten,to consume food
+A2,fall,fell,fallen,to drop downward
+B1,feed,fed,fed,to give food to
+A1,feel,felt,felt,to experience by touch or emotion
+A2,fight,fought,fought,to engage in combat
+A1,find,found,found,to discover something
+C1,fling,flung,flung,to throw carelessly
+B2,flee,fled,fled,to run away quickly
+A2,fly,flew,flown,to move through air
+B2,forbid,forbade,forbidden,to refuse permission
+C1,foresee,foresaw,foreseen,anticipate something before it happens
+C1,forgo,forwent,forgone,give up or do without something
+A2,forget,forgot,forgotten,fail to remember
+B2,forgive,forgave,forgiven,stop feeling angry about an offense
+B1,freeze,froze,frozen,turn into ice or solidify from cold
+A1,get,got,got|gotten,obtain or receive something
+A1,give,gave,given,hand over something to someone
+A1,go,went,gone,move from one place to another
+A2,grow,grew,grown,increase in size or develop
+C1,grind,ground,ground,crush into small particles by friction
+B1,hang,hung,hung,suspend from above
+A1,have,had,had,possess or own something
+A1,hear,heard,heard,perceive sound through ears
+A2,hide,hid,hidden,put out of sight
+A1,hit,hit,hit,strike with force
+A2,hold,held,held,grasp or keep in hands
+A2,hurt,hurt,hurt,cause physical pain
+A1,keep,kept,kept,retain possession of something
+B2,kneel,kneeled,kneeled,rest on knees
+A1,know,knew,known,be aware through knowledge
+B1,lay,laid,laid,place something down flat
+A2,lead,led,led,guide or direct others
+B1,lean,leaned,leaned,rest at an angle for support
+B2,leap,leaped,leaped,jump a long way
+A1,learn,learned,learned,acquire knowledge or skill
+A1,leave,left,left,go away from a place
+B1,lend,lent,lent,give something temporarily
+A1,let,let,let,allow or permit
+A2,lit, lit, lit,make something burn with flame
+B2,lie,lay,lain,rest in a flat position
+A2,lose,lost,lost,fail to keep possession
 A1,make,made,made,create or produce something
-A1,know,knew,known,be aware or understand
-A1,think,thought,thought,form ideas or consider
-A1,take,took,taken,grasp or accept something
-A1,see,saw,seen,perceive with the eyes
-A1,come,came,come,move or arrive toward
-A1,give,gave,given,transfer or provide something
-A1,find,found,found,discover or locate something
-A1,tell,told,told,inform or narrate something
+A2,mean,meant,meant,intend to convey
+A1,meet,met,met,come together with someone
+B2,mistake,mistook,mistaken,identify something incorrectly
+B2,overcome,overcame,overcome,successfully deal with difficulty
+A1,pay,paid,paid,give money for goods or services
+B1,prove,proved,proven|proved,demonstrate truth with evidence
+A1,put,put,put,place something in position
+B1,quit,quit,quit,stop or leave permanently
+A1,read,read,read,look at and understand written text
+A2,ride,rode,ridden,sit on and control movement
+B1,ring,rang,rung,make a resonant sound
+B2,rise,rose,risen,move upward from lower position
+A1,run,ran,run,move fast on foot
+C1,saw,sawed,sawed,cut with a toothed tool
+A1,say,said,said,express words with voice
+A1,see,saw,seen,perceive with eyes
+B2,seek,sought,sought,try to find something
+A1,sell,sold,sold,give something in exchange for money
+A1,send,sent,sent,cause something to go to another place
+A2,set,set,set,put something in a particular place or position
+B2,sew,sewed,sewed,join fabric with needle and thread
+C1,shed,shed,shed,let something fall or drop off naturally
+B2,shake,shook,shaken,move back and forth quickly
+B1,shine,shined,shined,give off or reflect light
+B1,shoot,shot,shot,fire a bullet or arrow from a weapon
+A2,show,showed,showed,make something visible to others
+B2,shrink,shrank,shrunk,become smaller in size
+A2,shut,shut,shut,close something completely
+A2,sing,sang,sung,produce musical sounds with the voice
+B1,sink,sank,sunk,go down below the surface of liquid
+A1,sit,sat,sat,rest on the buttocks
+A1,sleep,slept,slept,rest in unconscious state
+B1,slide,slid,slid,move smoothly across a surface
+C1,slay,slew,slain,kill someone in a violent way
+A1,speak,spoke,spoken,use words with the voice
+A2,spend,spent,spent,use money or time for something
+A2,smell,smelled,smelled,perceive an odor through the nose
+B2,spill,spilled,spilled,cause liquid to flow out accidentally
+B2,spin,spun,spun,turn around rapidly
+B2,spit,spit,spit,force saliva out from the mouth
+B1,split,split,split,divide something into parts
+B2,spoil,spoiled,spoiled,damage the value or quality
+A2,spread,spread,spread,extend over a larger area
+B2,spring,sprang,sprung,jump suddenly with force
+A1,stand,stood,stood,be upright on feet
+A2,steal,stole,stolen,take something without permission
+B1,stick,stuck,stuck,attach or become fixed firmly
+B2,sting,stung,stung,wound with a sharp-pointed body part
+B2,stink,stank,stunk,have a very bad smell
+C1,stride,strode,stridden,walk with long decisive steps
+C1,strive,strove,striven,make great effort to achieve something
+B2,strike,struck,struck,hit forcefully
+B2,swear,swore,sworn,promise or affirm strongly
+B1,sweep,swept,swept,clean with a broom
+A2,swim,swam,swum,move through water using body
+B1,swing,swung,swung,move back and forth from a fixed point
+A1,take,took,taken,gain possession by grasping
+A1,teach,taught,taught,give knowledge or skills to others
+B1,tear,tore,torn,rip something into pieces
+A1,tell,told,told,communicate information to someone
+A1,think,thought,thought,use the mind to consider ideas
+B1,swell,swelled,swollen|swelled,increase in size due to fluid
+A2,throw,threw,thrown,send something through the air by force
+C1,thrust,thrust,thrust,push something suddenly and forcefully
+A1,understand,understood,understood,grasp the meaning of something
+C1,undergo,underwent,undergone,experience something unpleasant or difficult
+B2,undertake,undertook,undertaken,agree to do a task
+C1,uphold,upheld,upheld,support or maintain a principle
+A2,wake,waked,waked,stop sleeping
+A2,wear,wore,worn,have clothing or accessories on the body
+B2,weep,wept,wept,cry from strong emotion
+A1,win,won,won,achieve victory in a competition
+B2,wind,wound,wound,turn or twist something around
+B2,withdraw,withdrew,withdrawn,take something back or remove
+B2,withstand,withstood,withstood,endure without giving way
+A1,write,wrote,written,form words with letters on a surface
+А2
