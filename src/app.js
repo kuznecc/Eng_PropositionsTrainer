@@ -492,7 +492,7 @@ function App() {
 
   return React.createElement('div', { className: 'app' },
     React.createElement('div', { className: 'mode-bar' }, ...modeButtons),
-    React.createElement(ModeView, { mode, persisted, setPersisted })
+    React.createElement(ModeView, { key: modeId, mode, persisted, setPersisted })
   );
 }
 

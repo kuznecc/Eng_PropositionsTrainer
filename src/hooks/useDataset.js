@@ -42,7 +42,7 @@ export function useDataset(mode) {
     }
     run();
     return () => { alive = false; };
-  }, [mode]);
+  }, [mode.id]);
 
   return { rows, levels, loading };
 }
