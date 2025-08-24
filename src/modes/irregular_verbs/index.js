@@ -40,9 +40,7 @@ export const irregularVerbsMode = {
     return { before: cap(item.base), placeholder: '', after: '' };
   },
   evaluate(inputOrValues, item, opts) {
-    const selected = Array.isArray(opts?.selectedForms) && opts.selectedForms.length
-      ? opts.selectedForms
-      : ['past_simple'];
+    const selected = ['past_simple', 'past_participle'];
 
     // Multi-field evaluation: inputOrValues is an object of { key: value }
     if (inputOrValues && typeof inputOrValues === 'object' && !Array.isArray(inputOrValues)) {
@@ -87,9 +85,62 @@ export const irregularVerbsMode = {
     return { correct, correctAnswers: Array.from(pool) };
   },
   hint(item) {
-    return `Past Simple: ${item.past_simple}\nPast Participle: ${item.past_participle}`;
+    return `Past Simple: ${item.past_simple}
+Past Participle: ${item.past_participle}`;
   },
   levels(item) {
     return item.level || null;
   },
 };
+
+
+// --- 
+// Initial state for the form
+export const initialVerbFormState = {
+  values: { past_simple: [''], past_participle: [''] },
+  selectedForms: ['past_simple', 'past_participle'],
+  activePos: { key: 'past_simple', idx: 0 },
+};
+
+export function useVerbFormState() {
+  const React = globalThis.React;
+  const [state, setState] = React.useState(initialVerbFormState);
+
+  const setValues = React.useCallback((updater) => {
+    setState(prev => ({ ...prev, values: typeof updater === 'function' ? updater(prev.values) : updater }));
+  }, []);
+
+  const setSelectedForms = React.useCallback((updater) => {
+    setState(prev => ({ ...prev, selectedForms: typeof updater === 'function' ? updater(prev.selectedForms) : updater }));
+  }, []);
+
+  const setActivePos = React.useCallback((pos) => {
+    setState(prev => ({ ...prev, activePos: pos }));
+  }, []);
+
+  const onToggleSelectedForm = React.useCallback((key) => {
+    setSelectedForms(prev => {
+      const s = new Set(prev);
+      if (s.has(key)) {
+        s.delete(key);
+      } else {
+        s.add(key);
+      }
+      return Array.from(s);
+    });
+  }, [setSelectedForms]);
+
+  const resetValues = React.useCallback(() => {
+    setValues(initialVerbFormState.values);
+  }, [setValues]);
+
+  return {
+    ...state,
+    setValues,
+    setSelectedForms,
+    setActivePos,
+    onToggleSelectedForm,
+    resetValues,
+  };
+}
+

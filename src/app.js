@@ -55,9 +55,7 @@ function usePreconditionTypes() {
 function ModeView({ mode, persisted, setPersisted }) {
   const { rows, levels, loading } = useDataset(mode);
   const [selectedLevel, setSelectedLevel] = React.useState(persisted?.selectedLevel || 'All Levels');
-  const [selectedForms, setSelectedForms] = React.useState(
-    Array.isArray(persisted?.selectedForms) && persisted.selectedForms.length ? persisted.selectedForms : ['base']
-  );
+  
   const [formsValue, setFormsValue] = React.useState({ base: [''], past_simple: [''], past_participle: [''] });
   const [activePos, setActivePos] = React.useState({ key: 'base', idx: 0 });
   const inputRefs = React.useRef({ base: [], past_simple: [], past_participle: [] });
@@ -66,7 +64,7 @@ function ModeView({ mode, persisted, setPersisted }) {
     return rows.filter(r => (mode.levels(r) || '') === selectedLevel);
   }, [rows, selectedLevel, mode]);
   React.useEffect(() => { setPersisted(prev => ({ selectedLevel })); }, [selectedLevel]);
-  React.useEffect(() => { if (mode.id === 'irregular_verbs') setPersisted(prev => ({ selectedForms })); }, [selectedForms, mode]);
+  
 
   const { index, item, next } = useQueue(filtered);
   const inputRef = React.useRef(null);
@@ -76,100 +74,43 @@ function ModeView({ mode, persisted, setPersisted }) {
   const { toast, showToast, clearToast } = useToast();
   const preconditionTypes = usePreconditionTypes();
 
+  // Initialize forms for irregular verbs when item changes
+  React.useEffect(() => {
+    if (mode.id !== 'irregular_verbs' || !item) return;
+    const partsFor = (k) => String(item[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean).length
+          ? String(item[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean)
+          : [item[k] || ''];
+    const nextValues = {};
+    const order = ['past_simple', 'past_participle'];
+    for (const k of order) {
+      const count = partsFor(k).length;
+      nextValues[k] = Array(count).fill('');
+    }
+    setFormsValue(nextValues);
+    setActivePos({ key: 'past_simple', idx: 0 });
+    setTimeout(() => {
+      const el = inputRefs.current['past_simple']?.[0];
+      if (el) el.focus();
+    }, 0);
+  }, [mode, item]);
+
   React.useEffect(() => {
     setValue('');
     setShowHint(false);
     setTimeout(() => inputRef.current && inputRef.current.focus(), 0);
   }, [index]);
 
-  // Initialize forms for irregular verbs when item or selectedForms changes
-  React.useEffect(() => {
-    if (mode.id !== 'irregular_verbs' || !item) return;
-    const order = ['base','past_simple','past_participle'];
-    const partsFor = (k) => k === 'base'
-      ? [item.base || '']
-      : (String(item[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean).length
-          ? String(item[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean)
-          : [item[k] || '']
-        );
-    const nextValues = {};
-    for (const k of order) {
-      const count = partsFor(k).length;
-      if (selectedForms.includes(k)) {
-        nextValues[k] = Array(count).fill('');
-      } else {
-        nextValues[k] = partsFor(k);
-      }
-    }
-    setFormsValue(nextValues);
-    const firstEditableKey = order.find(k => selectedForms.includes(k));
-    const firstEditableIdx = 0;
-    setActivePos({ key: firstEditableKey || 'base', idx: firstEditableKey ? firstEditableIdx : 0 });
-    setTimeout(() => {
-      const el = inputRefs.current[firstEditableKey]?.[firstEditableIdx];
-      if (el) el.focus();
-    }, 0);
-  }, [mode, item, selectedForms]);
+  
 
-  // Shared toggle handler for forms selection
-  const toggleSelectedForm = React.useCallback((key) => {
-    setSelectedForms(prev => {
-      const wasSelected = prev.includes(key);
-      if (wasSelected) {
-        if (prev.length === 1) {
-          showToast('warning', 'Select at least one mode');
-          return prev;
-        }
-        // Deselect: set field to correct answers and move focus if needed
-        const partsFor = (k) => k === 'base'
-          ? [item?.base || '']
-          : (String(item?.[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean).length
-              ? String(item?.[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean)
-              : [item?.[k] || '']
-            );
-        setFormsValue(v => ({ ...v, [key]: partsFor(key) }));
-        if (activePos.key === key) {
-          const order = ['base','past_simple','past_participle'];
-          const remaining = prev.filter(k => k !== key);
-          const editablePairs = order.flatMap(k => remaining.includes(k)
-            ? (formsValue[k] || []).map((_, idx) => ({ key: k, idx }))
-            : []
-          );
-          const nextPair = editablePairs[0];
-          if (nextPair) {
-            setActivePos(nextPair);
-            setTimeout(() => inputRefs.current[nextPair.key]?.[nextPair.idx]?.focus(), 0);
-          }
-        }
-        return prev.filter(k => k !== key);
-      } else {
-        // Select: blank field and focus if no active form
-        const partsFor = (k) => k === 'base'
-          ? [item?.base || '']
-          : (String(item?.[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean).length
-              ? String(item?.[k] || '').toLowerCase().split('|').map(s => s.trim()).filter(Boolean)
-              : [item?.[k] || '']
-            );
-        const count = partsFor(key).length;
-        setFormsValue(v => ({ ...v, [key]: Array(count).fill('') }));
-        const next = [...prev, key];
-        const order = ['base','past_simple','past_participle'];
-        if (!order.some(k => prev.includes(k))) {
-          setActivePos({ key, idx: 0 });
-          setTimeout(() => inputRefs.current[key]?.[0]?.focus(), 0);
-        }
-        return next;
-      }
-    });
-  }, [item, activePos, formsValue]);
+  
 
   const onSubmit = () => {
     if (!item) return;
     if (toast?.type === 'warning') clearToast();
     setShowHint(false);
     const evalRes = mode.id === 'irregular_verbs'
-      ? mode.evaluate(formsValue, item, { selectedForms })
-      : mode.evaluate(value, item, { selectedForms });
+      ? mode.evaluate(formsValue, item, { selectedForms: ['past_simple', 'past_participle'] })
+      : mode.evaluate(value, item);
     const { correct } = evalRes;
     if (correct) {
       showToast('ok', 'OK');
@@ -182,9 +123,9 @@ function ModeView({ mode, persisted, setPersisted }) {
               : [item[k] || '']
             );
         const capArr = (arr) => (arr || []).map(t => t ? t.charAt(0).toUpperCase() + t.slice(1) : t).join('|');
-        const baseArr = selectedForms.includes('base') ? (formsValue.base || []) : partsFor('base');
-        const psArr = selectedForms.includes('past_simple') ? (formsValue.past_simple || []) : partsFor('past_simple');
-        const ppArr = selectedForms.includes('past_participle') ? (formsValue.past_participle || []) : partsFor('past_participle');
+        const baseArr = partsFor('base');
+        const psArr = (formsValue.past_simple || []);
+        const ppArr = (formsValue.past_participle || []);
         const prevIrregularForms = {
           base: capArr(baseArr),
           past_simple: capArr(psArr),
@@ -205,18 +146,16 @@ function ModeView({ mode, persisted, setPersisted }) {
           setFormsValue(v => {
             const patch = { ...v };
             wrongPositions.forEach(pos => {
-              if (selectedForms.includes(pos.key)) {
-                const arr = Array.isArray(patch[pos.key]) ? patch[pos.key].slice() : [];
-                arr[pos.idx] = '';
-                patch[pos.key] = arr;
-              }
+              const arr = Array.isArray(patch[pos.key]) ? patch[pos.key].slice() : [];
+              arr[pos.idx] = '';
+              patch[pos.key] = arr;
             });
             return patch;
           });
-          const order = ['base','past_simple','past_participle'];
+          const order = ['past_simple','past_participle'];
           const leftmostWrong = order.flatMap(k => (formsValue[k] || []).map((_, idx) => ({ key: k, idx })))
             .find(p => wrongPositions.some(w => w.key === p.key && w.idx === p.idx));
-          const target = leftmostWrong || order.flatMap(k => selectedForms.includes(k) ? (formsValue[k] || []).map((_, idx) => ({ key: k, idx })) : [])[0];
+          const target = leftmostWrong || order.flatMap(k => (formsValue[k] || []).map((_, idx) => ({ key: k, idx })))[0];
           if (target) {
             setActivePos(target);
             setTimeout(() => inputRefs.current[target.key]?.[target.idx]?.focus(), 0);
@@ -225,11 +164,11 @@ function ModeView({ mode, persisted, setPersisted }) {
           // Fallback: clear all selected and focus first editable
           setFormsValue(v => {
             const patch = { ...v };
-            selectedForms.forEach(k => { patch[k] = (v[k] || []).map(() => ''); });
+            [ 'past_simple', 'past_participle' ].forEach(k => { patch[k] = (v[k] || []).map(() => ''); });
             return patch;
           });
-          const firstEditable = ['base','past_simple','past_participle']
-            .flatMap(k => selectedForms.includes(k) ? (formsValue[k] || []).map((_, idx) => ({ key: k, idx })) : [])
+          const firstEditable = ['past_simple','past_participle']
+            .flatMap(k => (formsValue[k] || []).map((_, idx) => ({ key: k, idx })))
             [0];
           setTimeout(() => firstEditable && inputRefs.current[firstEditable.key]?.[firstEditable.idx]?.focus(), 0);
         }
@@ -265,9 +204,7 @@ function ModeView({ mode, persisted, setPersisted }) {
       }
       // Irregular verbs keyboard handling
       const order = ['base','past_simple','past_participle'];
-      const editablePairs = order.flatMap(k => selectedForms.includes(k)
-        ? (formsValue[k] || []).map((_, idx) => ({ key: k, idx }))
-        : []);
+      const editablePairs = order.flatMap(k => (formsValue[k] || []).map((_, idx) => ({ key: k, idx })));
       const currIndex = editablePairs.findIndex(p => p.key === activePos.key && p.idx === activePos.idx);
       const firstEditable = editablePairs[0];
 
@@ -310,7 +247,7 @@ function ModeView({ mode, persisted, setPersisted }) {
     };
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [next, mode, selectedForms, activePos, formsValue]);
+  }, [next, mode, activePos, formsValue]);
 
   const prompt = item ? mode.buildPrompt(item) : { before: '', after: '' };
   const datasetStats = React.useMemo(() => {
@@ -330,45 +267,15 @@ function ModeView({ mode, persisted, setPersisted }) {
     loading ? React.createElement('div', null, 'Loading...') : (
       item ? (
         mode.id === 'irregular_verbs'
-          ? React.createElement(React.Fragment, null,
-              // Display base form in sentence style without input
-              React.createElement('div', { className: 'row' },
-                React.createElement('span', { className: 'before' }, (prompt.before || '').trim(), '\u00A0'),
-                React.createElement('span', { className: 'after' }, '\u00A0')
-              ),
-              React.createElement(VerbFormsInputs, {
-                item,
-                selectedForms,
-                values: formsValue,
-                setValues: setFormsValue,
-                activePos,
-                setActivePos,
-                inputRefs,
-                onToggleSelectedForm: toggleSelectedForm,
-                onMoveNext: () => {
-                  const order = ['base','past_simple','past_participle'];
-                  const editablePairs = order.flatMap(k => selectedForms.includes(k) ? (formsValue[k] || []).map((_, idx) => ({ key: k, idx })) : []);
-                  const idx = editablePairs.findIndex(p => p.key === activePos.key && p.idx === activePos.idx);
-                  if (idx >= 0 && idx < editablePairs.length - 1) {
-                    const nextPos = editablePairs[idx + 1];
-                    const el = inputRefs.current[nextPos.key]?.[nextPos.idx];
-                    if (el) el.focus();
-                    setActivePos(nextPos);
-                  }
-                },
-                onMovePrev: () => {
-                  const order = ['base','past_simple','past_participle'];
-                  const editablePairs = order.flatMap(k => selectedForms.includes(k) ? (formsValue[k] || []).map((_, idx) => ({ key: k, idx })) : []);
-                  const idx = editablePairs.findIndex(p => p.key === activePos.key && p.idx === activePos.idx);
-                  if (idx > 0) {
-                    const prevPos = editablePairs[idx - 1];
-                    const el = inputRefs.current[prevPos.key]?.[prevPos.idx];
-                    if (el) el.focus();
-                    setActivePos(prevPos);
-                  }
-                },
-              })
-            )
+          ? React.createElement(VerbFormsInputs, {
+              item,
+              values: formsValue,
+              setValues: setFormsValue,
+              activePos,
+              setActivePos,
+              inputRefs,
+              promptBefore: prompt.before,
+            })
           : React.createElement(QuizForm, {
               before: prompt.before,
               after: prompt.after,
