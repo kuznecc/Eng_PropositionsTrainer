@@ -294,8 +294,8 @@ function ModeView({ mode, persisted, setPersisted }) {
       mode.id === 'prepositions' && item.type ? React.createElement('div', { className: 'key-hint', style: { fontSize: '14px', textAlign: 'center', marginTop: '4px' } },
         React.createElement('strong', null, 'Preposition type:'), ' ', item.type
       ) : null,
-      mode.id === 'irregular_verbs' && item.meaning_en ? React.createElement('div', { className: 'key-hint', style: { fontSize: '14px', textAlign: 'center' } },
-        React.createElement('strong', null, 'Meaning:'), ' ', item.meaning_en
+      mode.id === 'irregular_verbs' && item.meaning ? React.createElement('div', { className: 'key-hint', style: { fontSize: '14px', textAlign: 'center' } },
+        React.createElement('strong', null, 'Meaning:'), ' ', item.meaning
       ) : null,
       React.createElement('div', { className: 'key-hint', style: { fontSize: '14px', textAlign: 'center', marginTop: '4px' } },
         React.createElement('strong', null, 'Solved:'), ' ', React.createElement('span', { style: { color: 'var(--ok)', fontWeight: 'bold' } }, String(persisted?.solvedCount || 0))

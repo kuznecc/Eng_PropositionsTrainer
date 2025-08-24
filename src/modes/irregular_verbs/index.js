@@ -14,7 +14,7 @@ export const irregularVerbsMode = {
   id: 'irregular_verbs',
   title: 'Irregular Verbs',
   datasetPath: 'assets/dataset/dataset_irregular_verbs.csv',
-  schema: { required: ['base', 'past_simple', 'past_participle'], optional: ['meaning_en', 'level'] },
+  schema: { required: ['base', 'past_simple', 'past_participle'], optional: ['meaning', 'level'] },
   fallback: [
     { level: 'A1', base: 'be', past_simple: 'was|were', past_participle: 'been', meaning_en: 'exist or have identity' },
     { level: 'A1', base: 'go', past_simple: 'went', past_participle: 'gone', meaning_en: 'move or travel somewhere' },
@@ -31,7 +31,7 @@ export const irregularVerbsMode = {
       base,
       past_simple,
       past_participle,
-      meaning_en: sanitize(row.meaning_en) || null,
+      meaning: sanitize(row.meaning) || null,
     };
     return out;
   },
