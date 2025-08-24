@@ -56,7 +56,7 @@ function ModeView({ mode, persisted, setPersisted }) {
   const { rows, levels, loading } = useDataset(mode);
   const [selectedLevel, setSelectedLevel] = React.useState(persisted?.selectedLevel || 'All Levels');
   const [selectedForms, setSelectedForms] = React.useState(
-    Array.isArray(persisted?.selectedForms) && persisted.selectedForms.length ? persisted.selectedForms : ['past_simple','past_participle']
+    Array.isArray(persisted?.selectedForms) && persisted.selectedForms.length ? persisted.selectedForms : ['base']
   );
   const [formsValue, setFormsValue] = React.useState({ base: [''], past_simple: [''], past_participle: [''] });
   const [activePos, setActivePos] = React.useState({ key: 'base', idx: 0 });
