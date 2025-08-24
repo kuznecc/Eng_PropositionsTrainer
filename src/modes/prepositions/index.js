@@ -6,7 +6,7 @@ import { fallback } from './fallback.js';
 export const prepositionsMode = {
   id: 'prepositions',
   title: 'Preposition Trainer',
-  datasetPath: 'assets/dataset/dataset.csv',
+  datasetPath: 'assets/dataset/dataset_prepositions.csv',
   schema,
   fallback,
   parseRow(row) {
