@@ -72,8 +72,7 @@ function ModeView({ mode, persisted, setPersisted }) {
   const inputRef = React.useRef(null);
   const [value, setValue] = React.useState('');
   const [showHint, setShowHint] = React.useState(false);
-  const [showDebug, setShowDebug] = React.useState(!!persisted?.showDebug);
-  React.useEffect(() => { setPersisted(prev => ({ showDebug })); }, [showDebug]);
+  const [showDebug, setShowDebug] = React.useState(false);
   const { toast, showToast, clearToast } = useToast();
   const preconditionTypes = usePreconditionTypes();
 
@@ -458,7 +457,7 @@ function App() {
       return {};
     }
   });
-  const defaultState = { selectedLevel: 'All Levels', showDebug: false, solvedCount: 0, prevAnswerParts: null };
+  const defaultState = { selectedLevel: 'All Levels', solvedCount: 0, prevAnswerParts: null };
   const persisted = perMode[modeId] || defaultState;
   const setPersisted = (update) => {
     setPerMode(prev => {
