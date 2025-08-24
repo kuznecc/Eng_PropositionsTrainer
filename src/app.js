@@ -305,12 +305,6 @@ function ModeView({ mode, persisted, setPersisted }) {
       if (/^[a-zA-Z-]$/.test(event.key) && !isTyping) {
         const target = editablePairs.find(p => p.key === activePos.key && p.idx === activePos.idx) || firstEditable;
         if (target) {
-          const ch = event.key;
-          setFormsValue(v => {
-            const arr = Array.isArray(v[target.key]) ? v[target.key].slice() : [];
-            arr[target.idx] = (arr[target.idx] || '') + ch;
-            return { ...v, [target.key]: arr };
-          });
           focusPos(target);
         }
       }
@@ -374,7 +368,6 @@ function ModeView({ mode, persisted, setPersisted }) {
                     setActivePos(prevPos);
                   }
                 },
-                onGlobalType: () => {}
               })
             )
           : React.createElement(QuizForm, {
